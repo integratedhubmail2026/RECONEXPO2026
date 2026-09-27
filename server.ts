@@ -1663,6 +1663,56 @@ async function startServer() {
     }
   });
 
+  // 11. Rendered Email HTML Preview Endpoint
+  app.get('/api/smtp/preview/:id', (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const logs = getEmailLogs();
+      const log = logs.find(l => l.id === id);
+      if (!log || !log.renderedHtml) {
+        return res.status(404).send(`
+          <!DOCTYPE html>
+          <html>
+            <head><title>Email Preview Not Found</title></head>
+            <body style="font-family: sans-serif; background: #021a14; color: #e2e8f0; padding: 40px; text-align: center;">
+              <h2>📧 Email Preview Not Available</h2>
+              <p>The requested email record (${id}) does not contain a rendered HTML body or has been cleared from logs.</p>
+            </body>
+          </html>
+        `);
+      }
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.send(log.renderedHtml);
+    } catch (err: any) {
+      return res.status(500).send(`Server Error: ${err.message}`);
+    }
+  });
+
+  // 12. Recent In-App Virtual Mailbox / Outbox
+  app.get('/api/smtp/inbox', (_req: Request, res: Response) => {
+    try {
+      const logs = getEmailLogs();
+      return res.json({
+        success: true,
+        count: logs.length,
+        inbox: logs.map(l => ({
+          id: l.id,
+          to: l.to,
+          toName: l.toName,
+          subject: l.subject,
+          template: l.template,
+          status: l.status,
+          sentAt: l.sentAt,
+          messageId: l.messageId,
+          deliveryMode: l.deliveryMode || 'virtual_inbox',
+          previewUrl: `/api/smtp/preview/${l.id}`
+        }))
+      });
+    } catch (err: any) {
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  });
+
   // =========================================================
   // 6.4. META (FACEBOOK) & TIKTOK PIXEL TRACKING APIS
   // =========================================================

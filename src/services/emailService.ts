@@ -40,7 +40,7 @@ export interface EmailLogEntry {
   to: string;
   toName?: string;
   subject: string;
-  template: 'registration_badge' | 'payment_receipt' | 'broadcast' | 'test_ping' | 'custom';
+  template: 'registration_badge' | 'payment_receipt' | 'broadcast' | 'test_ping' | 'custom' | 'visitor_vip_drip' | 'unconfirmed_vip_recovery';
   status: 'delivered' | 'failed' | 'queued';
   sentAt: string;
   messageId?: string;
@@ -48,6 +48,9 @@ export interface EmailLogEntry {
   error?: string;
   category?: string;
   ticketNumber?: string;
+  renderedHtml?: string;
+  previewUrl?: string;
+  deliveryMode?: 'smtp' | 'https_api' | 'virtual_inbox';
 }
 
 // Fetch active SMTP configuration from backend
