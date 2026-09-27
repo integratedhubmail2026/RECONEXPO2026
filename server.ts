@@ -2788,7 +2788,7 @@ LLMs-txt: ${baseUrl}/llms.txt
 - **Dates**: 29th – 30th October 2026 (10:00 AM – 6:00 PM WAT)
 - **Venue**: Shehu Musa Yar'Adua Centre, Plot 1161 Memorial Drive, Central Business District, Abuja, FCT, Nigeria
 - **Expected Scale**: 5,000+ Delegates, 120+ Exhibitors, 45+ Keynote Speakers, 22+ Participating Countries, ₦50B+ Projected Deals.
-- **Organizers**: Organized by Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce & Industry (ACCI).
+- **Organizers**: Organized by Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce and Industry(ACCI).
 
 ## Canonical Website & Links
 - **Home**: ${baseUrl}/

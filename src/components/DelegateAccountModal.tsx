@@ -282,7 +282,7 @@ export const DelegateAccountModal: React.FC<DelegateAccountModalProps> = ({
                 <div className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="text"
-                    placeholder="e.g. danladi.investments@gmail.com, RECON-2026-ELT-8491, or +234803..."
+                    placeholder="e.g. delegate@company.ng, RECON-2026-..., or +234 803..."
                     value={loginQuery}
                     onChange={(e) => {
                       setLoginQuery(e.target.value);

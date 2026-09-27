@@ -101,13 +101,6 @@ export const UnconfirmedVipRecoverySubTab: React.FC<UnconfirmedVipRecoverySubTab
   const [dispatchingBatch, setDispatchingBatch] = useState(false);
   const [sendingTest, setSendingTest] = useState(false);
 
-  // Simulation Modal State
-  const [isSimulateModalOpen, setIsSimulateModalOpen] = useState(false);
-  const [simName, setSimName] = useState('Alhaji Garba Shehu');
-  const [simEmail, setSimEmail] = useState('garba.shehu@sahara-holdings.ng');
-  const [simOrg, setSimOrg] = useState('Sahara Urban Developments Ltd');
-  const [simPhone, setSimPhone] = useState('+234 803 777 8899');
-
   // Load all initial data
   const loadData = async () => {
     setLoading(true);
@@ -223,30 +216,6 @@ export const UnconfirmedVipRecoverySubTab: React.FC<UnconfirmedVipRecoverySubTab
     }
   };
 
-  // Handle Simulate Incomplete Registration
-  const handleSimulateEnrollment = async () => {
-    if (!simEmail || !simName) {
-      showToast('❌ Please provide name and email for simulation.');
-      return;
-    }
-    const ticketNo = `RECON-2026-LEAD-${Math.floor(1000 + Math.random() * 9000)}`;
-    const res = await enrollUnconfirmedVip({
-      ticketNumber: ticketNo,
-      fullName: simName,
-      email: simEmail,
-      phone: simPhone,
-      organization: simOrg,
-      tierName: 'Elite VIP Guest (Unconfirmed Payment)',
-      amountDueNGN: 25000,
-      paymentRef: `SIM-UNPAID-${Date.now()}`
-    });
-
-    if (res.success) {
-      showToast(`✅ Simulated Pending VIP [${simName}] enrolled in Payment Recovery Drip!`);
-      await loadData();
-    }
-  };
-
   // Filtered subscribers list
   const filteredSubscribers = subscribers.filter(s => {
     const matchesSearch = s.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -293,15 +262,6 @@ export const UnconfirmedVipRecoverySubTab: React.FC<UnconfirmedVipRecoverySubTab
             >
               <Send className={`w-4 h-4 ${dispatchingBatch ? 'animate-bounce' : ''}`} />
               {dispatchingBatch ? 'Dispatching Batch...' : 'Run VIP Recovery Dispatch Now'}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsSimulateModalOpen(true)}
-              className="px-3.5 py-2.5 bg-white/10 hover:bg-white/20 text-rose-200 font-bold rounded-xl text-xs flex items-center gap-1.5 border border-rose-400/30 transition-all cursor-pointer"
-            >
-              <Zap className="w-4 h-4 text-amber-400" />
-              Simulate Incomplete VIP
             </button>
           </div>
         </div>
@@ -1035,98 +995,7 @@ export const UnconfirmedVipRecoverySubTab: React.FC<UnconfirmedVipRecoverySubTab
         </div>
       )}
 
-      {/* ========================================================= */}
-      {/* MODAL 3: SIMULATION & TEST TOOL                           */}
-      {/* ========================================================= */}
-      {isSimulateModalOpen && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl border border-slate-200">
-            <div className="bg-gradient-to-r from-rose-600 to-amber-600 text-white p-5 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-amber-300" />
-                <div>
-                  <h3 className="text-base font-black">Simulate Unconfirmed VIP Payment</h3>
-                  <p className="text-xs text-rose-100">Test auto-enrollment and Admin Confirmation auto-stop</p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsSimulateModalOpen(false)}
-                className="p-1 hover:bg-black/10 rounded-full text-white cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-6 space-y-4">
-              <div className="bg-rose-50 rounded-xl p-3 text-xs text-rose-950 border border-rose-200 leading-relaxed">
-                💡 <strong>How to Test:</strong> Enroll this simulated VIP lead into the recovery drip, view them on Day 0 in the table, then click <strong>"Confirm & Stop"</strong> to watch the sequence immediately halt!
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">Full Name</label>
-                <input
-                  type="text"
-                  value={simName}
-                  onChange={(e) => setSimName(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-800"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">Email Address</label>
-                <input
-                  type="email"
-                  value={simEmail}
-                  onChange={(e) => setSimEmail(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-800"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">Phone Number</label>
-                <input
-                  type="text"
-                  value={simPhone}
-                  onChange={(e) => setSimPhone(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-800"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">Company / Organization</label>
-                <input
-                  type="text"
-                  value={simOrg}
-                  onChange={(e) => setSimOrg(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-800"
-                />
-              </div>
-
-              <div className="pt-2 flex items-center justify-end gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsSimulateModalOpen(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl cursor-pointer"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  onClick={async () => {
-                    await handleSimulateEnrollment();
-                    setIsSimulateModalOpen(false);
-                    setActiveView('subscribers');
-                  }}
-                  className="px-5 py-2 bg-rose-600 hover:bg-rose-500 text-white font-black text-xs rounded-xl shadow-md cursor-pointer"
-                >
-                  Enroll Unconfirmed VIP & View
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* End of SubTab */}
     </div>
   );
 };

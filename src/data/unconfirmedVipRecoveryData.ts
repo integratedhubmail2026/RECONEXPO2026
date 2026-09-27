@@ -262,7 +262,7 @@ export const DEFAULT_UNCONFIRMED_VIP_CONFIG: UnconfirmedVipRecoveryConfig = {
   name: 'Elite VIP Unconfirmed / Pending Registration Daily Drip',
   description: 'Automated daily follow-up system that tracks pending or incomplete Elite VIP registrations and sends personalized benefit reminders with direct portal links. Follow-up immediately halts the moment admin confirms attendee.',
   isActive: true,
-  autoEnrollUnpaidVips: true,
+  autoEnrollUnpaidVips: false,
   stopImmediatelyOnAdminConfirmation: true, // Core rule: Stop upon admin confirmation
   maxFollowUpDays: 7,
   sendTimeOfDay: '09:30 AM WAT',
@@ -278,109 +278,4 @@ export const DEFAULT_UNCONFIRMED_VIP_CONFIG: UnconfirmedVipRecoveryConfig = {
   steps: DEFAULT_UNCONFIRMED_VIP_STEPS
 };
 
-export const INITIAL_SAMPLE_UNCONFIRMED_VIP_SUBSCRIBERS: UnconfirmedVipSubscriber[] = [
-  {
-    id: 'vip_sub_1',
-    attendeeTicketNumber: 'RECON-2026-LEAD-5301',
-    fullName: 'Chief Emeka Nnamani',
-    email: 'emeka.nnamani@enugu-prop.com',
-    phone: '+234 805 771 2233',
-    organization: 'Coal City Infrastructure Consortium',
-    tierName: 'Elite Guest (Paid)',
-    amountDueNGN: 25000,
-    currency: 'NGN',
-    paymentRef: 'FLW-PAY-LINK-5301',
-    registeredAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-    enrolledAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-    currentStepIndex: 1,
-    currentDayNumber: 1,
-    status: 'PENDING_PAYMENT',
-    lastEmailSentAt: new Date(Date.now() - 86400000 * 1).toISOString(),
-    lastStepSentId: 'vip_rec_day_1',
-    totalEmailsSent: 2,
-    deliveryHistory: [
-      {
-        stepId: 'vip_rec_day_0',
-        stepTitle: 'Day 0: Incomplete VIP Registration Notice',
-        sentAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-        subject: '🎟️ Action Required: Complete Your Elite VIP Guest Pass Registration [RECON-2026-LEAD-5301]',
-        status: 'OPENED'
-      },
-      {
-        stepId: 'vip_rec_day_1',
-        stepTitle: 'Day 1: VIP Executive Lounge & Lunch Reminder',
-        sentAt: new Date(Date.now() - 86400000 * 1).toISOString(),
-        subject: '☕ Don\'t Miss Out on the VIP Executive Lounge: Complete Your Pass Confirmation, Chief Emeka Nnamani',
-        status: 'CLICKED'
-      }
-    ]
-  },
-  {
-    id: 'vip_sub_2',
-    attendeeTicketNumber: 'RECON-2026-VIP-9942',
-    fullName: 'Engr. Dapo Olawale',
-    email: 'dapo.olawale@greenstructures.ng',
-    phone: '+234 802 119 4488',
-    organization: 'Green Structures & PropTech Ltd',
-    tierName: 'Elite VIP Guest',
-    amountDueNGN: 25000,
-    currency: 'NGN',
-    paymentRef: 'BANK-TRF-9942',
-    registeredAt: new Date(Date.now() - 86400000 * 4).toISOString(),
-    enrolledAt: new Date(Date.now() - 86400000 * 4).toISOString(),
-    currentStepIndex: 3,
-    currentDayNumber: 3,
-    status: 'PAYMENT_CONFIRMED_BY_ADMIN', // Admin confirmed after reviewing bank receipt!
-    lastEmailSentAt: new Date(Date.now() - 86400000 * 1.5).toISOString(),
-    lastStepSentId: 'vip_rec_day_3',
-    totalEmailsSent: 4,
-    confirmedAt: new Date(Date.now() - 86400000 * 0.8).toISOString(),
-    confirmedByAdmin: 'Admin Secretariat (Finance Officer)',
-    confirmationNote: 'Verified bank transfer receipt ref: ZEN-098812349. Marked PAID and follow-up halted.',
-    deliveryHistory: [
-      {
-        stepId: 'vip_rec_day_0',
-        stepTitle: 'Day 0: Incomplete VIP Registration Notice',
-        sentAt: new Date(Date.now() - 86400000 * 4).toISOString(),
-        subject: '🎟️ Action Required: Complete Your Elite VIP Guest Pass Registration [RECON-2026-VIP-9942]',
-        status: 'OPENED'
-      },
-      {
-        stepId: 'vip_rec_day_3',
-        stepTitle: 'Day 3: B2B Deal Room Matchmaking',
-        sentAt: new Date(Date.now() - 86400000 * 1.5).toISOString(),
-        subject: '🤝 Schedule 1-on-1 Investor Meetings: Finalize Your Elite VIP Pass, Engr. Dapo Olawale',
-        status: 'CLICKED'
-      }
-    ]
-  },
-  {
-    id: 'vip_sub_3',
-    attendeeTicketNumber: 'RECON-2026-VIP-8710',
-    fullName: 'Dr. Fatima Sanusi',
-    email: 'f.sanusi@northernurban.org',
-    phone: '+234 818 440 2211',
-    organization: 'Northern Urban Housing Initiative',
-    tierName: 'Elite VIP Guest',
-    amountDueNGN: 25000,
-    currency: 'NGN',
-    paymentRef: 'FLW-INT-8710',
-    registeredAt: new Date(Date.now() - 86400000 * 1).toISOString(),
-    enrolledAt: new Date(Date.now() - 86400000 * 1).toISOString(),
-    currentStepIndex: 0,
-    currentDayNumber: 0,
-    status: 'PENDING_PAYMENT',
-    lastEmailSentAt: new Date(Date.now() - 86400000 * 0.3).toISOString(),
-    lastStepSentId: 'vip_rec_day_0',
-    totalEmailsSent: 1,
-    deliveryHistory: [
-      {
-        stepId: 'vip_rec_day_0',
-        stepTitle: 'Day 0: Incomplete VIP Registration Notice',
-        sentAt: new Date(Date.now() - 86400000 * 0.3).toISOString(),
-        subject: '🎟️ Action Required: Complete Your Elite VIP Guest Pass Registration [RECON-2026-VIP-8710]',
-        status: 'OPENED'
-      }
-    ]
-  }
-];
+export const INITIAL_SAMPLE_UNCONFIRMED_VIP_SUBSCRIBERS: UnconfirmedVipSubscriber[] = [];

@@ -64,31 +64,8 @@ export const LiveRegistrationNotification: React.FC = () => {
     prevCountRef.current = attendees.length;
   }, [attendees]);
 
-  // 3. Periodic real-time rotation loop through actual registered delegates
-  useEffect(() => {
-    if (isDismissedByUser || attendees.length === 0) return;
-
-    // Initial popup 1.5 seconds after page load if real attendees exist
-    const initialTimer = setTimeout(() => {
-      if (attendees.length > 0) {
-        triggerNotification(attendees[0]);
-      }
-    }, 1500);
-
-    const interval = setInterval(() => {
-      if (attendees.length === 0) return;
-      currentIndexRef.current = (currentIndexRef.current + 1) % attendees.length;
-      const nextAttendee = attendees[currentIndexRef.current];
-      if (nextAttendee) {
-        triggerNotification(nextAttendee);
-      }
-    }, 9000);
-
-    return () => {
-      clearTimeout(initialTimer);
-      clearInterval(interval);
-    };
-  }, [attendees, isDismissedByUser]);
+  // Periodic simulated / auto loop disabled completely per user specification.
+  // Live registration popups only trigger when an actual user completes registration.
 
   const handleDismiss = () => {
     setActiveNotification(null);

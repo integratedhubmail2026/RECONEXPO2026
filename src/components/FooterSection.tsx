@@ -125,17 +125,26 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
                   {expoDetails.siteTexts?.footerOrganizerLabel || "This Event Is Organized By:"}
                 </p>
                 <div className="text-sm sm:text-base font-black text-white leading-relaxed">
-                  {expoDetails.siteTexts?.footerOrganizerText ? (
-                    <span className="text-emerald-400">{expoDetails.siteTexts.footerOrganizerText}</span>
-                  ) : (
-                    <>
-                      <span className="text-emerald-400">Afrinet Group</span>{' '}
-                      <span className="text-slate-300 font-medium text-xs sm:text-sm">and</span>{' '}
-                      <span className="text-emerald-400">Afrinex West Africa</span>{' '}
-                      <span className="text-amber-300 font-bold text-xs sm:text-sm block sm:inline mt-1 sm:mt-0">in Collaboration with</span>{' '}
-                      <span className="text-emerald-400">Abuja Chamber of Commerce & Industry</span>
-                    </>
-                  )}
+                  {(() => {
+                    const text = expoDetails.siteTexts?.footerOrganizerText;
+                    const isLegacy = !text ||
+                      text.includes("Organized by the RECON Expo Secretariat") ||
+                      text.includes("Real Estate Development Associations") ||
+                      text.includes("Federal Ministries") ||
+                      text.includes("Abuja Chamber of Commerce & Industry");
+                    if (isLegacy) {
+                      return (
+                        <>
+                          <span className="text-emerald-400">Afrinet Group</span>{' '}
+                          <span className="text-slate-300 font-medium text-xs sm:text-sm">and</span>{' '}
+                          <span className="text-emerald-400">Afrinex West Africa</span>{' '}
+                          <span className="text-amber-300 font-bold text-xs sm:text-sm block sm:inline mt-1 sm:mt-0">in Collaboration with</span>{' '}
+                          <span className="text-emerald-400">Abuja Chamber of Commerce and Industry(ACCI)</span>
+                        </>
+                      );
+                    }
+                    return <span className="text-emerald-400">{text}</span>;
+                  })()}
                 </div>
               </div>
             </div>
@@ -507,7 +516,20 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-4 border-t border-white/10">
           <div className="text-center md:text-left">
             <p>
-              {expoDetails.siteTexts?.footerCopyright || "© 2026 Real Estate & Construction Expo. All Rights Reserved."}
+              {(() => {
+                const text = expoDetails.siteTexts?.footerCopyright || expoDetails.siteTexts?.footerCopyrightText;
+                if (
+                  !text ||
+                  (text.includes("Real Estate & Construction Expo. All Rights Reserved.") && !text.includes("Afrinet Group")) ||
+                  text.includes("Organized by the RECON Expo Secretariat") ||
+                  text.includes("Real Estate Development Associations") ||
+                  text.includes("Federal Ministries") ||
+                  text.includes("Abuja Chamber of Commerce & Industry")
+                ) {
+                  return "© 2026 RECON Expo (Real Estate & Construction Expo). All Rights Reserved. Organized by Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce and Industry(ACCI).";
+                }
+                return text;
+              })()}
             </p>
           </div>
 

@@ -402,12 +402,20 @@ export async function getVisitorDripSubscribers(): Promise<VisitorDripSubscriber
     if (local) {
       const parsed = JSON.parse(local);
       if (Array.isArray(parsed)) {
-        return parsed;
+        const cleaned = parsed.filter(s => 
+          !s.attendeeTicketNumber?.startsWith('RECON-2026-VIS-4102') &&
+          !s.attendeeTicketNumber?.startsWith('RECON-2026-VIS-3981') &&
+          !s.attendeeTicketNumber?.startsWith('RECON-2026-VIS-5012') &&
+          !s.attendeeTicketNumber?.startsWith('RECON-2026-VIS-2894') &&
+          !s.id?.startsWith('sub_')
+        );
+        try { localStorage.setItem(VISITOR_DRIP_SUBSCRIBERS_KEY, JSON.stringify(cleaned)); } catch {}
+        return cleaned;
       }
     }
   } catch {}
 
-  return INITIAL_SAMPLE_VISITOR_SUBSCRIBERS;
+  return [];
 }
 
 export async function saveVisitorDripSubscribers(subscribers: VisitorDripSubscriber[]): Promise<void> {
@@ -640,12 +648,19 @@ export async function getUnconfirmedVipSubscribers(): Promise<UnconfirmedVipSubs
     if (local) {
       const parsed = JSON.parse(local);
       if (Array.isArray(parsed)) {
-        return parsed;
+        const cleaned = parsed.filter(s => 
+          !s.attendeeTicketNumber?.startsWith('RECON-2026-LEAD-5301') &&
+          !s.attendeeTicketNumber?.startsWith('RECON-2026-VIP-9942') &&
+          !s.attendeeTicketNumber?.startsWith('RECON-2026-VIP-8710') &&
+          !s.id?.startsWith('vip_sub_')
+        );
+        try { localStorage.setItem(UNCONFIRMED_VIP_SUBSCRIBERS_KEY, JSON.stringify(cleaned)); } catch {}
+        return cleaned;
       }
     }
   } catch {}
 
-  return INITIAL_SAMPLE_UNCONFIRMED_VIP_SUBSCRIBERS;
+  return [];
 }
 
 export async function saveUnconfirmedVipSubscribers(subscribers: UnconfirmedVipSubscriber[]): Promise<void> {

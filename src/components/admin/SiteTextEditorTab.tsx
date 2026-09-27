@@ -4,7 +4,6 @@ import { SiteTexts } from '../../types';
 import { 
   Type, 
   Save, 
-  RotateCcw, 
   Sparkles, 
   Globe, 
   Layers, 
@@ -34,7 +33,6 @@ export const SiteTextEditorTab: React.FC<SiteTextEditorTabProps> = ({ onShowToas
   const [activeSection, setActiveSection] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
-  const [pendingResetSection, setPendingResetSection] = useState<{ title: string; keys: (keyof SiteTexts)[] } | null>(null);
 
   // Local state copy for siteTexts to allow smooth editing and one-click saving
   const [texts, setTexts] = useState<SiteTexts>(() => ({
@@ -62,23 +60,6 @@ export const SiteTextEditorTab: React.FC<SiteTextEditorTabProps> = ({ onShowToas
     }
   };
 
-  const handleResetSection = (title: string, sectionKeys: (keyof SiteTexts)[]) => {
-    setPendingResetSection({ title, keys: sectionKeys });
-  };
-
-  const confirmResetSection = () => {
-    if (!pendingResetSection) return;
-    setTexts(prev => {
-      const next = { ...prev };
-      pendingResetSection.keys.forEach(k => {
-        delete next[k];
-      });
-      return next;
-    });
-    if (onShowToast) onShowToast(`"${pendingResetSection.title}" reverted to system defaults.`);
-    setPendingResetSection(null);
-  };
-
   const sections = [
     {
       id: 'navbar',
@@ -104,7 +85,7 @@ export const SiteTextEditorTab: React.FC<SiteTextEditorTabProps> = ({ onShowToas
         { key: 'heroCategory', label: 'Hero Category Sub-heading', type: 'text', placeholder: 'REAL ESTATE EXPO IN ABUJA, NIGERIA' },
         { key: 'heroThemeLabel', label: 'Hero Official Theme Label', type: 'text', placeholder: 'OFFICIAL EXPO THEME' },
         { key: 'heroOrganizerLabel', label: 'Organizer Attribution Prefix', type: 'text', placeholder: 'This Event Is Organized By:' },
-        { key: 'heroOrganizerText', label: 'Organizer Organizations Text', type: 'textarea', placeholder: 'Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce & Industry' },
+        { key: 'heroOrganizerText', label: 'Organizer Organizations Text', type: 'textarea', placeholder: 'Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce and Industry(ACCI)' },
         { key: 'heroCountdownTitle', label: '24-Hour Countdown Timer Box Header', type: 'text', placeholder: '24-Hour VIP Registration & Discount Window' },
         { key: 'heroPrimaryCta', label: 'Hero Primary Action Button', type: 'text', placeholder: 'REGISTER NOW' },
         { key: 'heroSecondaryCta', label: 'Hero Secondary Action Button', type: 'text', placeholder: 'EXPLORE EXPO' },
@@ -255,11 +236,11 @@ export const SiteTextEditorTab: React.FC<SiteTextEditorTabProps> = ({ onShowToas
         { key: 'footerPrimaryCta', label: 'Footer Primary Button', type: 'text', placeholder: 'REGISTER NOW FOR EXPO 2026' },
         { key: 'footerSecondaryCta', label: 'Footer Secondary Button', type: 'text', placeholder: 'BOOK AN EXHIBITION BOOTH' },
         { key: 'footerOrganizerLabel', label: 'Footer Organizer Label', type: 'text', placeholder: 'This Event Is Organized By:' },
-        { key: 'footerOrganizerText', label: 'Footer Organizer Organizations Text', type: 'textarea', placeholder: 'Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce & Industry' },
+        { key: 'footerOrganizerText', label: 'Footer Organizer Organizations Text', type: 'textarea', placeholder: 'Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce and Industry(ACCI)' },
         { key: 'footerAboutText', label: 'Footer About Expo Paragraph', type: 'textarea', placeholder: 'The 8th Real Estate & Construction Expo 2026 is Nigeria’s definitive real sector platform for high-impact investments, smart housing, and construction technology.' },
         { key: 'footerSecretariatTitle', label: 'Secretariat Form Header', type: 'text', placeholder: 'Contact the Organizing Secretariat' },
         { key: 'footerSecretariatSubtitle', label: 'Secretariat Form Sub-description', type: 'textarea', placeholder: 'Have specific inquiries regarding VIP delegations, press accreditation, or speaking opportunities? Send us a direct dispatch.' },
-        { key: 'footerCopyright', label: 'Footer Copyright Notice', type: 'text', placeholder: '© 2026 Real Estate & Construction Expo. All Rights Reserved.' },
+        { key: 'footerCopyright', label: 'Footer Copyright Notice', type: 'text', placeholder: '© 2026 RECON Expo (Real Estate & Construction Expo). All Rights Reserved. Organized by Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce and Industry(ACCI).' },
         { key: 'footerDeveloperLabel', label: 'Website Designer Label', type: 'text', placeholder: 'This website is designed by:' },
         { key: 'footerDeveloperName', label: 'Website Designer Name', type: 'text', placeholder: 'Integrated Hub Nigeria' },
         { key: 'footerDeveloperPhone', label: 'Website Designer Phone', type: 'text', placeholder: '08100449449' }
@@ -390,18 +371,6 @@ export const SiteTextEditorTab: React.FC<SiteTextEditorTabProps> = ({ onShowToas
                     </h3>
                   </div>
                 </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handleResetSection(sec.title, sectionKeys)}
-                    className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer"
-                    title="Reset this section to default texts"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Reset Section Defaults</span>
-                  </button>
-                </div>
               </div>
 
               {/* Section Fields Grid */}
@@ -478,41 +447,6 @@ export const SiteTextEditorTab: React.FC<SiteTextEditorTabProps> = ({ onShowToas
           <span>Save & Apply All Texts</span>
         </button>
       </div>
-
-      {/* Reset Section Confirmation Modal */}
-      {pendingResetSection && (
-        <div className="fixed inset-0 z-[350] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="bg-[#031d17] border border-amber-500/30 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 flex-shrink-0 mt-0.5">
-                <RotateCcw className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="text-base font-extrabold text-white font-display">Revert Section Texts</h3>
-                <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                  Are you sure you want to revert all customized texts for <strong className="text-white">"{pendingResetSection.title}"</strong> back to default system values?
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
-              <button
-                type="button"
-                onClick={() => setPendingResetSection(null)}
-                className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 text-xs font-bold transition-colors cursor-pointer"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={confirmResetSection}
-                className="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-emerald-950 text-xs font-extrabold transition-all cursor-pointer shadow-lg"
-              >
-                Confirm Revert
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

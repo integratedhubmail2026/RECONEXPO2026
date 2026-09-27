@@ -63,7 +63,7 @@ export const EXPO_DETAILS: ExpoDetails = {
     heroCategory: "REAL ESTATE EXPO IN ABUJA, NIGERIA",
     heroThemeLabel: "OFFICIAL EXPO THEME",
     heroOrganizerLabel: "This Event Is Organized By:",
-    heroOrganizerText: "Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce & Industry",
+    heroOrganizerText: "Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce and Industry(ACCI)",
     heroPrimaryCta: "Register as Delegate / Visitor",
     heroSecondaryCta: "Explore Full Schedule & Speakers",
     heroCountdownTitle: "24-Hour VIP Registration & Discount Window",
@@ -162,12 +162,13 @@ export const EXPO_DETAILS: ExpoDetails = {
     footerPrimaryCta: "REGISTER NOW FOR EXPO 2026",
     footerSecondaryCta: "BOOK AN EXHIBITION BOOTH",
     footerAboutText: "The 8th Real Estate & Construction Expo 2026 is Nigeria’s definitive real sector platform for high-impact investments, smart housing, and construction technology.",
-    footerOrganizerText: "This Event Is Organized By: Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce & Industry",
+    footerOrganizerText: "Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce and Industry(ACCI)",
     footerQuickLinksTitle: "QUICK LINKS",
     footerHelplineTitle: "OFFICIAL DESK & HELPLINES",
     footerSecretariatTitle: "Contact the Organizing Secretariat",
     footerSecretariatSubtitle: "Have specific inquiries regarding VIP delegations, press accreditation, or speaking opportunities? Send us a direct dispatch.",
-    footerCopyrightText: "© 2026 RECON Expo (Real Estate & Construction Expo). All Rights Reserved. Organized by Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce & Industry."
+    footerCopyright: "© 2026 RECON Expo (Real Estate & Construction Expo). All Rights Reserved. Organized by Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce and Industry(ACCI).",
+    footerCopyrightText: "© 2026 RECON Expo (Real Estate & Construction Expo). All Rights Reserved. Organized by Afrinet Group and Afrinex West Africa in Collaboration with Abuja Chamber of Commerce and Industry(ACCI)."
   }
 };
 

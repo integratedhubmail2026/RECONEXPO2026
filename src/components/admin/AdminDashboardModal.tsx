@@ -225,7 +225,6 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
     logoutMarketer,
     confirmCommissionPayment,
     verifyReferralCode,
-    resetToDefaults,
     exportDataJson,
     importDataJson,
     registerAttendee,
@@ -994,34 +993,6 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
     showToast("Full website configuration JSON backup downloaded!");
   };
 
-  // Add dummy test attendee
-  const handleAddSampleAttendee = () => {
-    const randomNum = Math.floor(1000 + Math.random() * 9000);
-    const sampleTiers = ['visitor', 'elite', 'exhibitor', 'sponsor', 'partner'];
-    const selectedTier = sampleTiers[Math.floor(Math.random() * sampleTiers.length)];
-    
-    registerAttendee({
-      ticketNumber: `RECON-2026-${selectedTier.toUpperCase().slice(0,3)}-${randomNum}`,
-      tier: selectedTier === 'elite' ? 'Elite Guest (Paid)' : selectedTier === 'visitor' ? 'Visitor (Free)' : selectedTier,
-      passType: selectedTier,
-      fullName: `Engr. Oladipo Adeleke ${randomNum}`,
-      email: `adeleke.${randomNum}@abuja-properties.ng`,
-      organization: `Adeleke Infrastructure Holdings`,
-      role: `Chief Operating Officer`,
-      phone: `+234 803 ${Math.floor(100 + Math.random() * 900)} ${Math.floor(1000 + Math.random() * 9000)}`,
-      city: 'Abuja (FCT)',
-      photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
-      registeredAt: new Date().toISOString(),
-      accessDays: selectedTier === 'elite' ? 'All 10 VIP Benefits + Gala' : selectedTier === 'visitor' ? 'Exhibition Pavilions Only' : 'Full Conference & Expo Access',
-      qrCodeUrl: `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-${randomNum}`,
-      barcode: `RECON26${randomNum}`,
-      amountPaid: selectedTier === 'elite' ? '₦25,000' : '₦0 (Free)',
-      paymentRef: selectedTier === 'elite' ? `PAY-RECON-${randomNum}` : 'FREE-GATE',
-      paymentStatus: selectedTier === 'elite' ? 'PAID' : 'FREE'
-    });
-    showToast("New test delegate registered successfully!");
-  };
-
   return (
     <div 
       id="admin-dashboard-modal-backdrop"
@@ -1594,10 +1565,10 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                                 type="button"
                                 onClick={handleRestoreClearedNotifications}
                                 className="text-[11px] text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1 transition-colors cursor-pointer hover:underline"
-                                title="Restore all cleared alerts"
+                                title="Unhide all cleared alerts"
                               >
                                 <RotateCcw className="w-3 h-3" />
-                                <span>Restore Cleared ({clearedNotificationIds.length})</span>
+                                <span>Unhide Cleared ({clearedNotificationIds.length})</span>
                               </button>
                             )}
                           </div>
@@ -1663,14 +1634,6 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                     <Download className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Backup JSON</span>
                   </button>
-
-                  <div 
-                    title="Website auto-reset is permanently disabled. All custom content and admin edits are preserved."
-                    className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs font-semibold text-emerald-400 select-none"
-                  >
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>Auto-Reset: Disabled</span>
-                  </div>
                 </>
               )}
 
@@ -3107,7 +3070,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                           <h3 className="text-base font-bold text-white">No Messages Found</h3>
                           <p className="text-xs text-slate-400 max-w-md mx-auto">
                             {inboxSearch || inboxCategoryFilter !== 'ALL' || inboxStatusFilter !== 'ALL'
-                              ? "No secretariat dispatches match your search filters. Try resetting search or category filters."
+                              ? "No secretariat dispatches match your search filters. Try clearing search or category filters."
                               : "The Secretariat inbox is currently empty. Direct website inquiries will appear here automatically."}
                           </p>
                           {(inboxSearch || inboxCategoryFilter !== 'ALL' || inboxStatusFilter !== 'ALL') && (
@@ -3119,7 +3082,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                               }}
                               className="px-4 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold text-xs cursor-pointer border border-emerald-500/30"
                             >
-                              Reset All Filters
+                              Clear All Filters
                             </button>
                           )}
                         </div>
@@ -3414,18 +3377,18 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                           type="button"
                           onClick={() => {
                             requestConfirmation(
-                              "Restore Official Default Logo",
-                              "Are you sure you want to revert to the built-in official RECON Expo 2026 vector logo?",
+                              "Remove Custom Logo",
+                              "Are you sure you want to remove the custom uploaded logo?",
                               () => {
                                 updateExpoDetails({ logoUrl: '' });
-                                showToast("Restored official default vector logo.");
+                                showToast("Custom logo removed.");
                               }
                             );
                           }}
                           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-300 text-xs font-bold transition-all cursor-pointer"
                         >
-                          <RotateCcw className="w-3.5 h-3.5" />
-                          <span>Restore Default Logo</span>
+                          <Trash2 className="w-3.5 h-3.5" />
+                          <span>Remove Custom Logo</span>
                         </button>
                       )}
                     </div>
@@ -3640,47 +3603,6 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                           className="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/15 text-white text-xs focus:outline-none focus:border-emerald-400"
                         />
                       </div>
-                    </div>
-
-                    {/* 24-Hour Urgency Countdown & Anti-Reset Policy Container */}
-                    <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-amber-950/40 via-black/60 to-emerald-950/40 border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                      <div className="space-y-1 max-w-xl">
-                        <div className="flex items-center gap-2">
-                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                          <h4 className="text-xs font-black uppercase tracking-wider text-amber-300">
-                            24-Hour Countdown Mode (Never Auto-Resets)
-                          </h4>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">
-                            PROTECTED
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-slate-300 leading-relaxed">
-                          The homepage countdown displays the 24-Hour VIP Registration Window. Website auto-reset is permanently disabled—the timer and all website edits will never reset or wipe when delegates refresh or reload the page.
-                        </p>
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          requestConfirmation(
-                            "Manual 24-Hour Timer Restart",
-                            "Do you want to manually start a brand new 24-hour cycle from this exact moment? All other website settings and content remain permanently intact.",
-                            () => {
-                              const newTarget = Date.now() + 24 * 60 * 60 * 1000;
-                              try {
-                                localStorage.setItem('recon_expo_24h_countdown_target_v1', String(newTarget));
-                              } catch {}
-                              window.dispatchEvent(new CustomEvent('recon_manual_reset_24h_timer', { detail: { targetMs: newTarget } }));
-                              showToast("24-Hour Registration Countdown restarted from 24:00:00 (Auto-reset remains disabled).");
-                            }
-                          );
-                        }}
-                        className="px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 font-extrabold text-xs whitespace-nowrap transition-all cursor-pointer flex items-center gap-2"
-                        title="Manually restart the 24-hour countdown window"
-                      >
-                        <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
-                        <span>Manual 24-Hour Restart</span>
-                      </button>
                     </div>
                   </div>
 
@@ -3917,46 +3839,6 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         Customize all text, vertical banner branding, security ribbons, back-side Wi-Fi rules, and badge titles printed on official attendee ID cards.
                       </p>
                     </div>
-
-                    {isMainAdmin && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          updateExpoDetails({
-                            idCard: {
-                              verticalBannerText: "8th Real Estate & Construction Expo",
-                              headerTitle: "RECON EXPO",
-                              headerSubtitle: "REAL ESTATE & CONSTRUCTION EXPO",
-                              securityRibbonTop: "RECON EXPO 2026 • OFFICIAL ACCREDITATION • ABUJA NIGERIA • INTERNATIONAL DELEGATE •",
-                              securityRibbonBottom: "SECURE SMART BADGE • RFID/NFC ACTIVATED • VERIFIED CREDENTIALS •",
-                              backConciergeHeader: "INTERNATIONAL DELEGATE CONCIERGE & PROTOCOL",
-                              wifiSsid: "RECON2026_GUEST",
-                              backRule1: "1. This digital smart badge must remain visibly worn around the neck throughout exhibition pavilions, plenary halls, and B2B deal rooms.",
-                              backRule2: "2. Tap your badge or present your QR code at sponsor booths to receive instant digital project brochures and investment prospectuses.",
-                              backRule3: "3. This pass is strictly non-transferable. Valid government-issued photo identification may be requested at security checkpoints.",
-                              secretariatHelpline: "Secretariat Support & Emergency Desk",
-                              badgePassTypeLabels: {
-                                elite: "★ ELITE GUEST VIP PASS ★",
-                                press: "📸 PRESS & MEDIA CORPS PASS",
-                                official: "🏛️ OFFICIAL ORGANIZER PASS",
-                                security: "🛡️ SECURITY & PROTOCOL PASS",
-                                crew: "🛠️ TECHNICAL CREW PASS",
-                                medical: "🚑 MEDICAL & FIRST RESPONDER PASS",
-                                sponsor: "SUMMIT SPONSOR PASS",
-                                partner: "STRATEGIC PARTNER PASS",
-                                exhibitor: "EXHIBITOR BOOTH PASS",
-                                visitor: "VISITOR PASS"
-                              }
-                            }
-                          });
-                          showToast("ID Card text reset to default RECON Expo layout.");
-                        }}
-                        className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold text-slate-200 flex items-center gap-1.5 cursor-pointer"
-                      >
-                        <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
-                        <span>Reset Card Defaults</span>
-                      </button>
-                    )}
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -5444,26 +5326,6 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                           <button
                             type="button"
                             onClick={() => {
-                              if (window.confirm('Reset booth packages to default RECON 2026 options (Standard 9sqm, Executive 18sqm, Island 36sqm, Custom)?')) {
-                                DEFAULT_BOOTH_PACKAGES.forEach(def => {
-                                  if (!boothPackages.some(b => b.id === def.id)) {
-                                    addBoothPackage(def);
-                                  } else {
-                                    editBoothPackage(def.id, def);
-                                  }
-                                });
-                                showToast('Default booth packages restored!');
-                              }
-                            }}
-                            className="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-bold transition-all border border-white/10 flex items-center gap-1.5"
-                          >
-                            <RotateCcw className="w-3.5 h-3.5" />
-                            <span>Restore Defaults</span>
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => {
                               setNewBoothForm({
                                 id: `booth_${Date.now()}`,
                                 name: '',
@@ -6188,39 +6050,6 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                           </p>
                         </div>
                       </div>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          requestConfirmation(
-                            "Restore Default Showcase Texts",
-                            "Revert all headlines, captions, and button labels in the logo area to the official RECON 2026 default wording?",
-                            () => {
-                              updateExpoDetails({
-                                siteTexts: {
-                                  ...expoDetails.siteTexts,
-                                  sponsorsBadge: "INDUSTRY TITANS & INSTITUTIONAL BACKERS",
-                                  sponsorsHeading: "OUR PREMIUM SPONSORS",
-                                  sponsorsSubtitle: "Backed by Nigeria’s leading civil engineering conglomerates, tier-1 mortgage banks, luxury estate developers, and infrastructure pioneers.",
-                                  supportersHeading: "OUR SUPPORTERS & PARTNERS",
-                                  supportersSubtitle: "Endorsed by Federal Ministries, Chartered Institutes, and Architectural Councils across Nigeria.",
-                                  sponsorsCtaBadge: "ELEVATE YOUR BRAND AUTHORITY",
-                                  sponsorsCtaHeading: "Position Your Brand in Front of 5,000+ Key Decision Makers",
-                                  sponsorsCtaTitle: "Position Your Brand in Front of 5,000+ Key Decision Makers",
-                                  sponsorsCtaSubtitle: "Gain direct access to high-net-worth real estate buyers, state commissioners, major building contractors, and sovereign fund managers.",
-                                  sponsorsCtaButton: "BECOME A SPONSOR",
-                                  sponsorsPartnerButton: "PARTNER WITH THE EXPO"
-                                }
-                              });
-                              showToast("Restored default logo area texts.");
-                            }
-                          );
-                        }}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
-                      >
-                        <RotateCcw className="w-3.5 h-3.5" />
-                        <span>Reset Defaults</span>
-                      </button>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
@@ -7014,15 +6843,6 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         >
                           <Camera className="w-3.5 h-3.5" />
                           <span>Gate Camera Scanner</span>
-                        </button>
-
-                        <button
-                          onClick={handleAddSampleAttendee}
-                          className="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-                          title="Simulate a new registration booking"
-                        >
-                          <Plus className="w-3.5 h-3.5 text-emerald-400" />
-                          <span>Add Sample Record</span>
                         </button>
 
                         {/* Direct Download Actions */}
@@ -8184,7 +8004,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   <div>
                     <h2 className="text-xl font-bold text-white font-display">Admin Security & Data Backups</h2>
                     <p className="text-xs text-slate-400">
-                      Update your administrator credentials, download full website JSON snapshots, or restore backups.
+                      Update your administrator credentials, download full website JSON snapshots, or import backups.
                     </p>
                   </div>
 
@@ -8261,14 +8081,14 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                     </form>
                   </div>
 
-                  {/* JSON Backup & Restore Card */}
+                  {/* JSON Backup & Import Card */}
                   <div className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 space-y-4">
                     <h3 className="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
                       <Download className="w-4 h-4" />
-                      <span>Full Website Data Backup & Restore</span>
+                      <span>Full Website Data Backup & Import</span>
                     </h3>
                     <p className="text-xs text-slate-300">
-                      Download a single JSON file containing all event text, speakers, programmes, tiers, and registrations. You can restore this file at any time.
+                      Download a single JSON file containing all event text, speakers, programmes, tiers, and registrations. You can import this file at any time.
                     </p>
 
                     <div className="flex flex-wrap items-center gap-3">
@@ -8285,13 +8105,13 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-bold text-xs flex items-center gap-2 transition-colors cursor-pointer"
                       >
                         <Upload className="w-4 h-4 text-emerald-400" />
-                        <span>Restore from JSON</span>
+                        <span>Import from JSON</span>
                       </button>
                     </div>
 
                     {isImportModalOpen && (
                       <div className="p-4 rounded-xl bg-black/60 border border-white/15 space-y-3 mt-4">
-                        <h4 className="font-bold text-white text-xs">Paste Backup JSON to Restore</h4>
+                        <h4 className="font-bold text-white text-xs">Paste Backup JSON to Import</h4>
                         <textarea
                           rows={6}
                           value={importJsonText}

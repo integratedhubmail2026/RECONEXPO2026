@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, RefreshCw, Trash2 } from 'lucide-react';
+import { AlertTriangle, RefreshCw } from 'lucide-react';
 
 interface Props {
   children: React.ReactNode;
@@ -27,21 +27,9 @@ export class ErrorBoundary extends React.Component<Props, State> {
     console.error('Uncaught Error in RECON 2026 App:', error, errorInfo);
   }
 
-  handleReset = () => {
+  handleReload = () => {
     this.setState({ hasError: false, error: null });
     window.location.reload();
-  };
-
-  handleClearDataAndReset = () => {
-    try {
-      // Clear temporary session data only; never auto-reset persistent website data or admin configurations
-      sessionStorage.clear();
-      // Remove temporary transient flags without touching saved content, attendees, or admin settings
-      sessionStorage.removeItem('recon_temp_error_state');
-    } catch {
-      // Ignore storage errors
-    }
-    window.location.href = window.location.origin;
   };
 
   render() {
@@ -70,19 +58,11 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
             <div className="space-y-3 pt-2">
               <button
-                onClick={this.handleReset}
+                onClick={this.handleReload}
                 className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/50 transition-all cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4 text-black" />
                 <span>Reload Website & Restore</span>
-              </button>
-
-              <button
-                onClick={this.handleClearDataAndReset}
-                className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
-              >
-                <Trash2 className="w-3.5 h-3.5 text-slate-400" />
-                <span>Reset Cache & Reload</span>
               </button>
             </div>
           </div>

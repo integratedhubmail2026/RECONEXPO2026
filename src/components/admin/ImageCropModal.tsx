@@ -487,7 +487,7 @@ export const ImageCropModal: React.FC<ImageCropModalProps> = ({
                   type="button"
                   onClick={handleReset}
                   className="px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 text-slate-300 text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer"
-                  title="Reset Position"
+                  title="Center Position"
                 >
                   <RefreshCw className="w-3 h-3" />
                   <span>Center</span>

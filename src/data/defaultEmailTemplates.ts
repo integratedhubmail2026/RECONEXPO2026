@@ -1897,9 +1897,9 @@ export const DEFAULT_30_DAY_SEQUENCE: EmailAutomationSequence = {
   name: 'RECON 2026 Master 30-Day Attendee & VIP Follow-up Automation',
   description: 'Automated 12-step follow-up and nurture journey delivered over 30 days to every registered delegate, exhibitor, and attendee to ensure 100% summit attendance and VIP engagement.',
   isActive: true,
-  autoEnrollNewRegistrations: true,
-  totalEnrolled: 148,
-  totalDelivered: 894,
+  autoEnrollNewRegistrations: false,
+  totalEnrolled: 0,
+  totalDelivered: 0,
   steps: [
     {
       id: 'step-d0',
@@ -1912,7 +1912,7 @@ export const DEFAULT_30_DAY_SEQUENCE: EmailAutomationSequence = {
       subject: '🎟️ Official Digital Pass & Registration Confirmation: RECON Expo 2026',
       preheader: 'Your fast-track entry barcode and delegate ticket number #{ticket}.',
       bodyPreview: 'Welcome {name}! Your registration for RECON 2026 in Abuja is confirmed. Keep your digital badge accessible for contact-free entry.',
-      lastSentCount: 148
+      lastSentCount: 0
     },
     {
       id: 'step-d1',

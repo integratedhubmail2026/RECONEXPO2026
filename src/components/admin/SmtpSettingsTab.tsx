@@ -969,29 +969,7 @@ RECON Expo 2026 Organizing Secretariat`);
               </div>
 
               {/* SAVE BUTTON */}
-              <div className="pt-2 flex items-center justify-between border-t border-white/10">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setConfig(prev => ({
-                      ...prev,
-                      headerTagline: '🏛️ 8TH REAL ESTATE & CONSTRUCTION EXPO 2026',
-                      headerTitle: 'RECON EXPO ABUJA',
-                      headerSubtitle: "October 29–31, 2026 • Shehu Musa Yar'Adua Centre, Abuja, Nigeria",
-                      footerOrganization: 'RECON Expo 2026 Secretariat & Organizing Committee',
-                      footerVenueAddress: "Shehu Musa Yar'Adua Centre, Memorial Drive, Central Business District, Abuja, FCT, Nigeria",
-                      footerHotlines: '+234 803 234 5678 | +234 802 987 6543',
-                      footerOfficialEmail: 'reconexpo@afrinetgroup.com',
-                      footerWebsite: 'https://www.afrinetgroup.com',
-                      footerDisclaimer: 'You are receiving this official communication because you registered for the 8th Real Estate & Construction Expo 2026. To manage your email preferences or update registration details, reply directly to this email or visit our secretariat portal.'
-                    }));
-                    showToast('Reset to default templates.');
-                  }}
-                  className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white text-xs font-bold transition-colors cursor-pointer"
-                >
-                  Reset Defaults
-                </button>
-
+              <div className="pt-2 flex items-center justify-end border-t border-white/10">
                 <button
                   type="button"
                   onClick={handleSaveConfig}

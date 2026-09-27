@@ -95,12 +95,6 @@ export const VisitorUpgradeDripSubTab: React.FC<VisitorUpgradeDripSubTabProps> =
   const [dispatchingBatch, setDispatchingBatch] = useState(false);
   const [sendingTest, setSendingTest] = useState(false);
 
-  // Simulation Modal State
-  const [isSimulateModalOpen, setIsSimulateModalOpen] = useState(false);
-  const [simName, setSimName] = useState('Arc. Ibrahim Danladi');
-  const [simEmail, setSimEmail] = useState('ibrahim.danladi@sample-firm.ng');
-  const [simOrg, setSimOrg] = useState('Danladi Architectural Studios');
-
   // Load all initial data
   const loadDripData = async () => {
     setLoading(true);
@@ -198,28 +192,6 @@ export const VisitorUpgradeDripSubTab: React.FC<VisitorUpgradeDripSubTabProps> =
     }
   };
 
-  // Handle Simulate New Registration & Instant Upgrade
-  const handleSimulateEnrollment = async () => {
-    if (!simEmail || !simName) {
-      showToast('❌ Please provide a name and email for simulation.');
-      return;
-    }
-    const ticketNo = `RECON-2026-VIS-${Math.floor(1000 + Math.random() * 9000)}`;
-    const res = await enrollVisitorInUpgradeDrip({
-      ticketNumber: ticketNo,
-      fullName: simName,
-      email: simEmail,
-      organization: simOrg,
-      phone: '+234 803 000 1122',
-      city: 'Abuja, FCT'
-    });
-
-    if (res.success) {
-      showToast(`✅ Simulated Free Visitor [${simName}] enrolled in Day 0 of Upgrade Drip!`);
-      await loadDripData();
-    }
-  };
-
   const handleSimulateUpgrade = async (sub: VisitorDripSubscriber) => {
     const res = await triggerEliteUpgradeExitRule({
       ticketNumber: sub.attendeeTicketNumber,
@@ -279,15 +251,6 @@ export const VisitorUpgradeDripSubTab: React.FC<VisitorUpgradeDripSubTabProps> =
             >
               <Send className={`w-4 h-4 ${dispatchingBatch ? 'animate-bounce' : ''}`} />
               {dispatchingBatch ? 'Processing Batch...' : 'Run Daily Drip Dispatch Now'}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsSimulateModalOpen(true)}
-              className="px-3.5 py-2.5 bg-white/10 hover:bg-white/20 text-amber-300 font-bold rounded-xl text-xs flex items-center gap-1.5 border border-amber-400/30 transition-all cursor-pointer"
-            >
-              <Zap className="w-4 h-4 text-amber-400" />
-              Simulate & Test Flow
             </button>
           </div>
         </div>
@@ -1052,88 +1015,7 @@ export const VisitorUpgradeDripSubTab: React.FC<VisitorUpgradeDripSubTabProps> =
         </div>
       )}
 
-      {/* ========================================================= */}
-      {/* MODAL 3: SIMULATION & TEST TOOL                           */}
-      {/* ========================================================= */}
-      {isSimulateModalOpen && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl border border-slate-200">
-            <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-emerald-950 p-5 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-emerald-950" />
-                <div>
-                  <h3 className="text-base font-black">Simulate Visitor Upgrade Flow</h3>
-                  <p className="text-xs text-emerald-950/80">Test auto-enrollment and auto-stop exit rule</p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsSimulateModalOpen(false)}
-                className="p-1 hover:bg-black/10 rounded-full text-emerald-950 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-6 space-y-4">
-              <div className="bg-amber-50 rounded-xl p-3 text-xs text-amber-900 border border-amber-200 leading-relaxed">
-                💡 <strong>How to Test:</strong> Enroll this simulated Free Visitor into the Drip, watch them appear on Day 0 in the pipeline table, then click "Upgrade" to see the sequence immediately stop.
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">Full Name</label>
-                <input
-                  type="text"
-                  value={simName}
-                  onChange={(e) => setSimName(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-slate-800"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">Email Address</label>
-                <input
-                  type="email"
-                  value={simEmail}
-                  onChange={(e) => setSimEmail(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-800"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">Company / Organization</label>
-                <input
-                  type="text"
-                  value={simOrg}
-                  onChange={(e) => setSimOrg(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-800"
-                />
-              </div>
-
-              <div className="pt-2 flex items-center justify-end gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsSimulateModalOpen(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl cursor-pointer"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  onClick={async () => {
-                    await handleSimulateEnrollment();
-                    setIsSimulateModalOpen(false);
-                    setActiveView('subscribers');
-                  }}
-                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-emerald-950 font-black text-xs rounded-xl shadow-md cursor-pointer"
-                >
-                  Enroll Free Visitor & View Table
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* End of SubTab */}
     </div>
   );
 };

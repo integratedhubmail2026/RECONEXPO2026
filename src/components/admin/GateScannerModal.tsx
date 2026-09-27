@@ -376,7 +376,7 @@ export const GateScannerModal: React.FC<GateScannerModalProps> = ({
                 value={manualCode}
                 onChange={(e) => setManualCode(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleLookup(manualCode)}
-                placeholder="Enter Ticket ID (e.g. RECON-2026-ELT-8491) or Name..."
+                placeholder="Enter Ticket ID (e.g. RECON-2026-...) or Name..."
                 className="w-full pl-9 pr-3 py-2.5 bg-black/40 border border-white/15 rounded-xl text-slate-100 placeholder-slate-500 text-xs focus:border-emerald-400 focus:outline-none"
               />
             </div>

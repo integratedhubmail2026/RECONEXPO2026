@@ -66,15 +66,13 @@ import {
 import { 
   getEmailTemplates, 
   saveEmailTemplate, 
-  resetEmailTemplatesToDefault, 
   get30DayAutomationSequence, 
   save30DayAutomationSequence, 
   triggerAutomationStepTest, 
   getCampaignsList, 
   saveCampaign, 
   sendCampaignNow, 
-  getMarketingStats,
-  resetEmailAnalyticsOnly
+  getMarketingStats
 } from '../../services/marketingService';
 import { 
   getSmtpConfig, 
@@ -172,9 +170,7 @@ export const EmailMarketingSuiteTab: React.FC<EmailMarketingSuiteTabProps> = ({
   const [smtpConfig, setSmtpConfig] = useState<SmtpConfig | null>(null);
 
   // Non-blocking 2-step confirmation states (iframe-compatible)
-  const [confirmResetAnalyticsActive, setConfirmResetAnalyticsActive] = useState(false);
   const [confirmDeleteLeadsActive, setConfirmDeleteLeadsActive] = useState(false);
-  const [confirmRestoreTemplatesActive, setConfirmRestoreTemplatesActive] = useState(false);
 
   // Template Builder States
   const [selectedTemplate, setSelectedTemplate] = useState<EmailTemplate | null>(null);
@@ -506,18 +502,6 @@ export const EmailMarketingSuiteTab: React.FC<EmailMarketingSuiteTabProps> = ({
     setSelectedTemplate({ ...selectedTemplate, blocks: newBlocks });
   };
 
-  // Handle Reset Templates
-  const handleResetTemplates = async () => {
-    if (!window.confirm('Reset all email templates to master default designs (27 templates)? Any custom modifications will be refreshed.')) return;
-    const res = await resetEmailTemplatesToDefault();
-    setTemplates(res.templates);
-    if (res.templates.length > 0) {
-      setSelectedTemplate(res.templates[0]);
-      setActiveEditingBlockId(res.templates[0].blocks[0]?.id || null);
-    }
-    showToast('✅ All 27 templates restored to master specifications.');
-  };
-
   // Handle Toggle Automation Step
   const handleToggleStep = async (stepId: string) => {
     if (!sequence) return;
@@ -736,25 +720,6 @@ export const EmailMarketingSuiteTab: React.FC<EmailMarketingSuiteTabProps> = ({
     }
   };
 
-  // Handle Reset Analytics Only (Leaves all 27 templates and custom email content 100% untouched)
-  const handleResetAnalytics = async () => {
-    if (!window.confirm('📊 RESET EMAIL ANALYTICS & LOGS ONLY?\n\nThis will clear all email delivery logs, campaign delivery counters, open/click rate metrics, and subscriber delivery logs.\n\nIMPORTANT: All 27 email templates, custom email content, subjects, block layouts, and drip sequences will remain 100% UNTOUCHED and intact.\n\nProceed to reset email analytics?')) {
-      return;
-    }
-
-    try {
-      const res = await resetEmailAnalyticsOnly();
-      if (res.success) {
-        showToast('✅ All email analytics, delivery metrics, and logs reset to zero! All email templates & content remain 100% intact.');
-        loadAllData();
-      } else {
-        showToast(`❌ ${res.message}`);
-      }
-    } catch {
-      showToast('❌ Failed to reset email analytics.');
-    }
-  };
-
   // Handle Delete/Clear Enrolled Leads
   const handleDeleteEnrolledLeads = async () => {
     if (!window.confirm('👥 REMOVE/DELETE ALL ENROLLED DRIP LEADS?\n\nThis will clear all subscriber automation logs and unenroll current campaign leads. This action is irreversible.\n\nProceed to delete enrolled leads?')) {
@@ -777,31 +742,6 @@ export const EmailMarketingSuiteTab: React.FC<EmailMarketingSuiteTabProps> = ({
       loadAllData();
     } catch {
       showToast('❌ Failed to clear enrolled leads.');
-    }
-  };
-
-  // Handle Restore All 33 Master Email Templates to Default
-  const handleResetAllTemplates = async () => {
-    if (!window.confirm('📑 RESTORE ALL 33 MASTER EMAIL TEMPLATES?\n\nThis will re-initialize all 33 default master templates (VIP Digital Pass, Exhibitor Onboarding, Keynotes, Program Agenda, B2B Matchmaking, Hotel Discounts, Early-Bird Expiry, Awards Gala, Masterclasses, Newsletters, Drip Sequences, Press Accreditation, Event Activities, etc.).\n\nProceed to restore all 33 master templates?')) {
-      return;
-    }
-
-    try {
-      const res = await resetEmailTemplatesToDefault();
-      if (res.success && res.templates) {
-        setTemplates(res.templates);
-        if (res.templates.length > 0) {
-          setSelectedTemplate(res.templates[0]);
-          if (res.templates[0].blocks.length > 0) {
-            setActiveEditingBlockId(res.templates[0].blocks[0].id);
-          }
-        }
-        showToast('🎉 Successfully restored all 33 master email templates!');
-      } else {
-        showToast('❌ Failed to restore master templates.');
-      }
-    } catch {
-      showToast('❌ Error restoring email templates.');
     }
   };
 
@@ -872,24 +812,6 @@ export const EmailMarketingSuiteTab: React.FC<EmailMarketingSuiteTabProps> = ({
             </button>
             <button
               type="button"
-              onClick={handleResetAnalytics}
-              className="px-3.5 py-2.5 bg-red-500/20 hover:bg-red-500/30 text-red-200 border border-red-500/40 font-bold rounded-xl text-xs flex items-center gap-2 transition-all cursor-pointer"
-              title="Reset Email Analytics & Logs Only (Content Unchanged)"
-            >
-              <RotateCcw className="w-3.5 h-3.5 text-red-400" />
-              Reset Analytics Only
-            </button>
-            <button
-              type="button"
-              onClick={handleResetAllTemplates}
-              className="px-3.5 py-2.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 border border-emerald-500/40 font-bold rounded-xl text-xs flex items-center gap-2 transition-all cursor-pointer"
-              title="Restore All 33 Master Email Templates to Default State"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-              Restore All 33 Templates
-            </button>
-            <button
-              type="button"
               onClick={() => loadAllData()}
               className="px-3 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs flex items-center gap-2 transition-all cursor-pointer"
               title="Refresh Stats"
@@ -907,14 +829,6 @@ export const EmailMarketingSuiteTab: React.FC<EmailMarketingSuiteTabProps> = ({
               <span className="flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5" /> Total Delivered
               </span>
-              <button
-                type="button"
-                onClick={handleResetAnalytics}
-                className="p-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 rounded-lg transition-all cursor-pointer border border-red-500/20"
-                title="Delete/Reset Total Delivered Logs & Statistics"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-              </button>
             </div>
             <div className="text-xl font-black text-white mt-1">
               {stats ? stats.totalEmailsDelivered.toLocaleString() : '0'}
@@ -945,7 +859,7 @@ export const EmailMarketingSuiteTab: React.FC<EmailMarketingSuiteTabProps> = ({
                 type="button"
                 onClick={handleDeleteEnrolledLeads}
                 className="p-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 rounded-lg transition-all cursor-pointer border border-red-500/20"
-                title="Delete/Reset All Enrolled Leads & Subscribers"
+                title="Clear Enrolled Leads & Subscribers"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -1115,15 +1029,6 @@ export const EmailMarketingSuiteTab: React.FC<EmailMarketingSuiteTabProps> = ({
                 title="Open Stock Photo Gallery"
               >
                 <ImageIcon className="w-3.5 h-3.5 text-emerald-700" /> Stock Photos
-              </button>
-
-              <button
-                type="button"
-                onClick={handleResetTemplates}
-                className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer"
-                title="Restore all default templates"
-              >
-                <RefreshCw className="w-3.5 h-3.5" /> Reset Default
               </button>
 
               <button

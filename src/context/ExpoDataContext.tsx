@@ -289,462 +289,45 @@ const INITIAL_STAFF_ACCOUNTS: StaffAccount[] = [
 ];
 
 
-// Initial test attendees and leads with multi-level pipeline progress
-const INITIAL_ATTENDEES: AttendeeTicket[] = [
-  {
-    ticketNumber: "RECON-2026-ELT-8491",
-    tier: "Elite Guest (Paid)",
-    passType: "elite",
-    fullName: "Alhaji Ibrahim Danladi",
-    email: "danladi.investments@gmail.com",
-    organization: "Arewa Capital & Real Estate Syndicate",
-    role: "Managing Director",
-    city: "Abuja (FCT)",
-    photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 803 555 1289",
-    registeredAt: "2026-08-20T14:22:00.000Z",
-    accessDays: "All 10 VIP Benefits + Gala Dinner Banquet",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-ELT-8491",
-    barcode: "RECON26ELT8491",
-    amountPaid: "₦25,000",
-    paymentRef: "FLW-RECON-8491001",
-    paymentStatus: "PAID",
-    adminApproved: true,
-    adminApprovalStatus: "APPROVED",
-    discountAppliedNGN: 0,
-    commissionEarnedNGN: 0,
-    commissionPaidNGN: 0,
-    commissionCredited: false,
-    leadLevel: 6,
-    leadScore: 96,
-    dealValue: 25000,
-    leadSource: "VIP Registration Desk",
-    industrySector: "Banking & REITs",
-    priorityLevel: "VIP_CRITICAL",
-    assignedOfficer: "VIP Protocol Desk",
-    leadNotes: "Confirmed VIP Gala seat.",
-    lastContactedAt: "2026-08-28T16:00:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-ELT-9182",
-    tier: "Elite Guest (Paid)",
-    passType: "elite",
-    fullName: "Barr. Zainab Al-Hassan",
-    email: "zainab.alhassan@apexlaw.ng",
-    organization: "Apex Energy & Property Law Chambers",
-    role: "Senior Managing Partner",
-    city: "Abuja (FCT)",
-    photoUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 802 991 3344",
-    registeredAt: "2026-08-27T09:15:00.000Z",
-    accessDays: "All 10 VIP Benefits (Awaiting Admin ID Clearance)",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-ELT-9182",
-    barcode: "RECON26ELT9182",
-    amountPaid: "₦25,000",
-    paymentRef: "FLW-RECON-TXN-918204",
-    paymentStatus: "PAID",
-    adminApproved: false,
-    adminApprovalStatus: "PENDING",
-    rfidCode: "RFID-88192031",
-    discountAppliedNGN: 0,
-    commissionEarnedNGN: 0,
-    commissionPaidNGN: 0,
-    commissionCredited: false,
-    leadLevel: 5,
-    leadScore: 89,
-    dealValue: 25000,
-    leadSource: "Online Registration",
-    industrySector: "Real Estate & Construction Law",
-    priorityLevel: "HIGH",
-    assignedOfficer: "Secretariat Protocol Desk",
-    leadNotes: "Registered online. Paid ₦25,000 via Flutterwave.",
-    lastContactedAt: "2026-08-27T09:30:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-ELT-4402",
-    tier: "Elite Guest (Paid)",
-    passType: "elite",
-    fullName: "Arc. Kelechi Okafor",
-    email: "k.okafor@metrodesign.ng",
-    organization: "Metropolis Architectural Studio",
-    role: "Lead Principal Architect",
-    city: "Enugu State",
-    photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 803 882 1199",
-    registeredAt: "2026-08-27T11:20:00.000Z",
-    accessDays: "All 10 VIP Benefits (Awaiting Admin ID Clearance)",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-ELT-4402",
-    barcode: "RECON26ELT4402",
-    amountPaid: "₦25,000",
-    paymentRef: "FLW-RECON-TXN-440211",
-    paymentStatus: "PAID",
-    adminApproved: false,
-    adminApprovalStatus: "PENDING",
-    rfidCode: "RFID-44021983",
-    discountAppliedNGN: 0,
-    commissionEarnedNGN: 0,
-    commissionPaidNGN: 0,
-    commissionCredited: false,
-    leadLevel: 5,
-    leadScore: 85,
-    dealValue: 25000,
-    leadSource: "Online Registration",
-    industrySector: "Architecture & Urban Design",
-    priorityLevel: "MEDIUM",
-    assignedOfficer: "Secretariat Protocol Desk",
-    leadNotes: "Registered online. Paid ₦25,000 via Flutterwave.",
-    lastContactedAt: "2026-08-27T11:30:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-SPO-1093",
-    tier: "Sponsor Pass",
-    passType: "sponsor",
-    fullName: "Tunde Adeyemi-Bello",
-    email: "tunde.bello@zenithproperties.ng",
-    organization: "Zenith Heights Real Estate Investment Trust",
-    role: "Executive Vice President",
-    city: "Abuja (FCT)",
-    photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 802 443 6611",
-    registeredAt: "2026-08-24T11:45:00.000Z",
-    accessDays: "VIP Access & Headline Sponsorship Suite",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-SPO-1093",
-    barcode: "RECON26SPO1093",
-    amountPaid: "₦5,000,000",
-    paymentRef: "FLW-RECON-SPO1093",
-    paymentStatus: "PAID",
-    leadLevel: 6,
-    leadScore: 99,
-    dealValue: 5000000,
-    leadSource: "Corporate Sponsorship Direct",
-    industrySector: "Real Estate & Housing",
-    priorityLevel: "VIP_CRITICAL",
-    assignedOfficer: "Executive Sponsorship Directorate",
-    leadNotes: "Gold Headline Sponsor contract executed. Opening ceremony stage keynote confirmed.",
-    lastContactedAt: "2026-08-27T10:30:00.000Z",
-    maxStaffBadges: 5,
-    staffBadges: [
-      {
-        id: "sb-1",
-        fullName: "Tunde Adeyemi-Bello",
-        role: "Executive Vice President",
-        photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-        badgeNumber: "RECON-2026-SPO-1093-S01",
-        registeredAt: "2026-08-24T11:45:00.000Z"
-      },
-      {
-        id: "sb-2",
-        fullName: "Chidinma Nwosu",
-        role: "Corporate Relations Lead",
-        photoUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
-        badgeNumber: "RECON-2026-SPO-1093-S02",
-        registeredAt: "2026-08-25T09:30:00.000Z"
-      }
-    ]
-  },
-  {
-    ticketNumber: "RECON-2026-EXH-5510",
-    tier: "Exhibitor Booth Stand",
-    passType: "exhibitor",
-    fullName: "Arc. Folake Solanke",
-    email: "f.solanke@buildtech.ng",
-    organization: "BuildTech Solutions West Africa",
-    role: "Head of Marketing & Exhibitions",
-    city: "Lagos State",
-    photoUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 809 112 3344",
-    registeredAt: "2026-08-25T16:30:00.000Z",
-    accessDays: "Exhibitor Booth Stand & Staff VIP Pass",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-EXH-5510",
-    barcode: "RECON26EXH5510",
-    amountPaid: "₦350,000",
-    paymentRef: "FLW-RECON-EXH5510",
-    paymentStatus: "PAID",
-    leadLevel: 6,
-    leadScore: 92,
-    dealValue: 350000,
-    leadSource: "Website Exhibition Portal",
-    industrySector: "PropTech & Smart Cities",
-    priorityLevel: "HIGH",
-    assignedOfficer: "Exhibitor Logistics Desk",
-    leadNotes: "Booth B-04 36sqm corner allocated. Fascia name verified.",
-    lastContactedAt: "2026-08-28T09:15:00.000Z",
-    maxStaffBadges: 3,
-    staffBadges: [
-      {
-        id: "sb-ex1",
-        fullName: "Arc. Folake Solanke",
-        role: "Head of Marketing & Exhibitions",
-        photoUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80",
-        badgeNumber: "RECON-2026-EXH-5510-S01",
-        registeredAt: "2026-08-25T16:30:00.000Z"
-      }
-    ]
-  },
-  {
-    ticketNumber: "RECON-2026-PTN-7730",
-    tier: "Strategic Partner",
-    passType: "partner",
-    fullName: "Dr. Aliyu Mohammed",
-    email: "aliyu.m@housing.gov.ng",
-    organization: "Federal Ministry of Housing & Urban Development",
-    role: "Director of Public-Private Partnerships",
-    city: "Abuja (FCT)",
-    photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 803 889 0011",
-    registeredAt: "2026-08-26T10:10:00.000Z",
-    accessDays: "Strategic Partner Summit Access & MoU Suite",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-PTN-7730",
-    barcode: "RECON26PTN7730",
-    amountPaid: "MoU Alliance",
-    paymentRef: "MOU-PARTNER-2026",
-    paymentStatus: "PAID",
-    leadLevel: 6,
-    leadScore: 98,
-    dealValue: 0,
-    leadSource: "Government Secretariat Outreach",
-    industrySector: "Govt & Regulatory Policy",
-    priorityLevel: "VIP_CRITICAL",
-    assignedOfficer: "Director General Protocol",
-    leadNotes: "National Affordable Housing MoU signing scheduled for Day 2 Plenary.",
-    maxStaffBadges: 4,
-    staffBadges: [
-      {
-        id: "sb-p1",
-        fullName: "Dr. Aliyu Mohammed",
-        role: "Director of Public-Private Partnerships",
-        photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
-        badgeNumber: "RECON-2026-PTN-7730-S01",
-        registeredAt: "2026-08-26T10:10:00.000Z"
-      }
-    ],
-    lastContactedAt: "2026-08-28T14:40:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-LEAD-6210",
-    tier: "Exhibitor Booth Stand",
-    passType: "exhibitor",
-    fullName: "Engr. Farouk Bello",
-    email: "fbello@dangote-cement.com",
-    organization: "Dangote Building Systems Ltd",
-    role: "Regional Sales Director (North)",
-    city: "Kano / Abuja",
-    photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 803 400 9988",
-    registeredAt: "2026-08-27T13:10:00.000Z",
-    accessDays: "Pending Custom Pavilion Proforma",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-LEAD-6210",
-    barcode: "RECON26LEAD6210",
-    amountPaid: "₦1,850,000 (Pending)",
-    paymentRef: "FLW-INV-77402",
-    paymentStatus: "PENDING",
-    leadLevel: 5,
-    leadScore: 88,
-    dealValue: 1850000,
-    leadSource: "Secretariat B2B Inbound",
-    industrySector: "Building Materials & Manufacturing",
-    priorityLevel: "HIGH",
-    assignedOfficer: "Commercial Accounts Team",
-    leadNotes: "Custom 72sqm Island Pavilion proforma invoice dispatched. Awaiting final treasury release.",
-    lastContactedAt: "2026-08-28T17:20:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-LEAD-5301",
-    tier: "Elite Guest (Paid)",
-    passType: "elite",
-    fullName: "Chief Emeka Nnamani",
-    email: "emeka.nnamani@enugu-prop.com",
-    organization: "Coal City Infrastructure Consortium",
-    role: "Chairman & Principal Partner",
-    city: "Enugu State",
-    photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 805 771 2233",
-    registeredAt: "2026-08-27T15:40:00.000Z",
-    accessDays: "VIP 10-in-1 Benefits Pending Card Checkout",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-LEAD-5301",
-    barcode: "RECON26LEAD5301",
-    amountPaid: "₦25,000 (Pending)",
-    paymentRef: "FLW-PAY-LINK-5301",
-    paymentStatus: "PENDING",
-    leadLevel: 5,
-    leadScore: 84,
-    dealValue: 25000,
-    leadSource: "LinkedIn Executive Ad",
-    industrySector: "Infrastructure & EPC",
-    priorityLevel: "MEDIUM",
-    assignedOfficer: "VIP Protocol Desk",
-    leadNotes: "Initiated VIP checkout; requested corporate group invoice for 5 board directors.",
-    lastContactedAt: "2026-08-28T11:00:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-LEAD-4890",
-    tier: "Exhibitor Booth Stand",
-    passType: "exhibitor",
-    fullName: "Mrs. Victoria Adeleke-Peters",
-    email: "v.adeleke@lumina-solar.ng",
-    organization: "Lumina Clean Energy & Smart Facades",
-    role: "Chief Commercial Strategist",
-    city: "Lagos State",
-    photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 818 990 1200",
-    registeredAt: "2026-08-28T08:30:00.000Z",
-    accessDays: "Booth Evaluation Stage",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-LEAD-4890",
-    barcode: "RECON26LEAD4890",
-    amountPaid: "₦750,000 (Inquiry)",
-    paymentRef: "INQ-SQL-4890",
-    paymentStatus: "PENDING",
-    leadLevel: 4,
-    leadScore: 79,
-    dealValue: 750000,
-    leadSource: "Website Stand Booking Form",
-    industrySector: "PropTech & Smart Cities",
-    priorityLevel: "HIGH",
-    assignedOfficer: "Commercial Accounts Team",
-    leadNotes: "Submitted request for Green Energy Zone exhibition corner. Sent floor plan & technical spec.",
-    lastContactedAt: "2026-08-28T12:15:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-LEAD-4115",
-    tier: "Elite Guest (Paid)",
-    passType: "elite",
-    fullName: "Dr. Kalu Okoro",
-    email: "kalu.okoro@africainvest.org",
-    organization: "Pan-African Infrastructure Fund",
-    role: "Senior Investment Partner",
-    city: "Abuja / London",
-    photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80",
-    phone: "+44 7911 123456",
-    registeredAt: "2026-08-28T10:05:00.000Z",
-    accessDays: "B2B Deal Room Qualified",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-LEAD-4115",
-    barcode: "RECON26LEAD4115",
-    amountPaid: "₦25,000 (Pending)",
-    paymentRef: "INQ-SQL-4115",
-    paymentStatus: "PENDING",
-    leadLevel: 4,
-    leadScore: 82,
-    dealValue: 25000,
-    leadSource: "Direct Inbound Secretariat Call",
-    industrySector: "Banking & REITs",
-    priorityLevel: "HIGH",
-    assignedOfficer: "B2B Matchmaking Directorate",
-    leadNotes: "Wants private meeting with Minister of Housing and major road concessionaires.",
-    lastContactedAt: "2026-08-28T14:10:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-VIS-4102",
-    tier: "Visitor (Free)",
-    passType: "visitor",
-    fullName: "Engr. Nkechi Okonjo",
-    email: "nkechi@precastinnovations.ng",
-    organization: "Precast Innovations West Africa",
-    role: "Chief Commercial Officer",
-    city: "Lagos State",
-    photoUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 812 770 9944",
-    registeredAt: "2026-08-22T09:15:00.000Z",
-    accessDays: "Exhibition Pavilions & Booths Only",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-VIS-4102",
-    barcode: "RECON26VIS4102",
-    amountPaid: "₦0 (Free)",
-    paymentRef: "FREE-GATE-PASS",
-    paymentStatus: "FREE",
-    leadLevel: 3,
-    leadScore: 68,
-    dealValue: 0,
-    leadSource: "Online Free Registration Form",
-    industrySector: "Infrastructure & EPC",
-    priorityLevel: "MEDIUM",
-    assignedOfficer: "Attendee Engagement Team",
-    leadNotes: "Registered standard pass. High potential for VIP Gala upgrade or vendor matchup.",
-    lastContactedAt: "2026-08-26T16:20:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-LEAD-3392",
-    tier: "Visitor (Free)",
-    passType: "visitor",
-    fullName: "Arch. Segun Balogun",
-    email: "segun@balogunarchitects.com",
-    organization: "Studio Balogun Architecture",
-    role: "Lead Design Principal",
-    city: "Ibadan / Lagos",
-    photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 802 334 5566",
-    registeredAt: "2026-08-28T14:15:00.000Z",
-    accessDays: "Exhibition Pass",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-LEAD-3392",
-    barcode: "RECON26LEAD3392",
-    amountPaid: "₦0 (Free)",
-    paymentRef: "FREE-GATE-PASS",
-    paymentStatus: "FREE",
-    leadLevel: 3,
-    leadScore: 65,
-    dealValue: 0,
-    leadSource: "Architects Registration Council (ARCON) Newsletter",
-    industrySector: "Real Estate & Housing",
-    priorityLevel: "LOW",
-    assignedOfficer: "Attendee Engagement Team",
-    leadNotes: "Downloaded full event schedule. Interested in Sustainable Architecture Day 2 track.",
-    lastContactedAt: "2026-08-28T15:00:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-LEAD-2190",
-    tier: "Exhibitor Booth Stand",
-    passType: "exhibitor",
-    fullName: "Mr. Samuel Osei",
-    email: "sosei@ghana-heavyequipment.com",
-    organization: "West Africa Heavy Machinery & Cranes",
-    role: "General Manager - Export Sales",
-    city: "Accra / Abuja",
-    photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-    phone: "+233 24 555 7890",
-    registeredAt: "2026-08-28T15:30:00.000Z",
-    accessDays: "Brochure & Floor Plan Downloaded",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-LEAD-2190",
-    barcode: "RECON26LEAD2190",
-    amountPaid: "₦0 (Prospect)",
-    paymentRef: "PROSPECT-L2",
-    paymentStatus: "PENDING",
-    leadLevel: 2,
-    leadScore: 54,
-    dealValue: 600000,
-    leadSource: "Exhibition Floor Plan Download",
-    industrySector: "Infrastructure & EPC",
-    priorityLevel: "MEDIUM",
-    assignedOfficer: "Commercial Accounts Team",
-    leadNotes: "Downloaded Outdoor Heavy Equipment display rates. Follow up on logistics & customs clearance.",
-    lastContactedAt: "2026-08-28T16:10:00.000Z"
-  },
-  {
-    ticketNumber: "RECON-2026-LEAD-1055",
-    tier: "Visitor (Free)",
-    passType: "visitor",
-    fullName: "Ms. Amina Shehu",
-    email: "amina.shehu92@yahoo.com",
-    organization: "Apex Quantity Surveyors Ltd",
-    role: "Senior Quantity Surveyor",
-    city: "Kaduna State",
-    photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-    phone: "+234 813 444 8811",
-    registeredAt: "2026-08-28T17:00:00.000Z",
-    accessDays: "QR Campaign Scan Inbound",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECON-2026-LEAD-1055",
-    barcode: "RECON26LEAD1055",
-    amountPaid: "₦0 (Inbound)",
-    paymentRef: "DISCOVERY-L1",
-    paymentStatus: "PENDING",
-    leadLevel: 1,
-    leadScore: 42,
-    dealValue: 0,
-    leadSource: "Street Billboard QR Scan (Abuja Airport Road)",
-    industrySector: "Real Estate & Housing",
-    priorityLevel: "LOW",
-    assignedOfficer: "Attendee Engagement Team",
-    leadNotes: "Scanned campaign QR code; visited ticket tier breakdown.",
-    lastContactedAt: "2026-08-28T17:05:00.000Z"
+// Default registrations disabled & removed: system begins with 0 default/auto-generated registrations
+export const isSeedOrDefaultAttendee = (a: any): boolean => {
+  if (!a || !a.ticketNumber) return true;
+  const defaultTickets = [
+    'RECON-2026-ELT-8491',
+    'RECON-2026-ELT-9182',
+    'RECON-2026-ELT-4402',
+    'RECON-2026-SPO-1093',
+    'RECON-2026-EXH-5510',
+    'RECON-2026-PTN-7730',
+    'RECON-2026-LEAD-6210',
+    'RECON-2026-LEAD-5301',
+    'RECON-2026-LEAD-4890',
+    'RECON-2026-LEAD-4115',
+    'RECON-2026-VIS-4102',
+    'RECON-2026-LEAD-3392',
+    'RECON-2026-LEAD-2190',
+    'RECON-2026-LEAD-1055'
+  ];
+  if (defaultTickets.includes(a.ticketNumber)) return true;
+  if (typeof a.fullName === 'string' && (
+    a.fullName.includes('Oladipo Adeleke') ||
+    a.fullName.includes('Alhaji Ibrahim Danladi') ||
+    a.fullName.includes('Barr. Zainab Al-Hassan') ||
+    a.fullName.includes('Arc. Kelechi Okafor') ||
+    a.fullName.includes('Tunde Adeyemi-Bello') ||
+    a.fullName.includes('Arc. Folake Solanke') ||
+    a.fullName.includes('Dr. Aliyu Mohammed') ||
+    a.fullName.includes('Engr. Farouk Bello') ||
+    a.fullName.includes('Chief Emeka Nnamani') ||
+    a.fullName.includes('Victoria Adeleke-Peters') ||
+    a.fullName.includes('Kenneth Adeleke')
+  )) {
+    return true;
   }
-];
+  return false;
+};
+
+const INITIAL_ATTENDEES: AttendeeTicket[] = [];
 
 const LOCAL_STORAGE_MESSAGES_KEY = 'recon_expo_contact_messages_v1';
 
@@ -906,14 +489,36 @@ export const ExpoDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             ...EXPO_DETAILS.idCard,
             ...(parsed.expoDetails.idCard || {})
           },
-          siteTexts: {
-            ...EXPO_DETAILS.siteTexts,
-            ...(parsed.expoDetails.siteTexts || {}),
-            ...(isLegacyDate ? {
-              heroEventInfoDateSubtitle: EXPO_DETAILS.siteTexts?.heroEventInfoDateSubtitle,
-              footerCtaSubtitle: EXPO_DETAILS.siteTexts?.footerCtaSubtitle
-            } : {})
-          }
+          siteTexts: (() => {
+            const rawSiteTexts = parsed.expoDetails.siteTexts || {};
+            const isLegacyOrganizer = (text?: string) => 
+              !text || 
+              text.includes('Organized by the RECON Expo Secretariat') ||
+              text.includes('Real Estate Development Associations') ||
+              text.includes('Federal Ministries') ||
+              text.includes('Abuja Chamber of Commerce & Industry');
+
+            return {
+              ...EXPO_DETAILS.siteTexts,
+              ...rawSiteTexts,
+              heroOrganizerText: isLegacyOrganizer(rawSiteTexts.heroOrganizerText)
+                ? EXPO_DETAILS.siteTexts?.heroOrganizerText
+                : rawSiteTexts.heroOrganizerText,
+              footerOrganizerText: isLegacyOrganizer(rawSiteTexts.footerOrganizerText)
+                ? EXPO_DETAILS.siteTexts?.footerOrganizerText
+                : rawSiteTexts.footerOrganizerText,
+              footerCopyright: isLegacyOrganizer(rawSiteTexts.footerCopyright)
+                ? EXPO_DETAILS.siteTexts?.footerCopyright
+                : rawSiteTexts.footerCopyright,
+              footerCopyrightText: isLegacyOrganizer(rawSiteTexts.footerCopyrightText)
+                ? EXPO_DETAILS.siteTexts?.footerCopyrightText
+                : rawSiteTexts.footerCopyrightText,
+              ...(isLegacyDate ? {
+                heroEventInfoDateSubtitle: EXPO_DETAILS.siteTexts?.heroEventInfoDateSubtitle,
+                footerCtaSubtitle: EXPO_DETAILS.siteTexts?.footerCtaSubtitle
+              } : {})
+            };
+          })()
         };
       }
     } catch {
@@ -1017,7 +622,13 @@ export const ExpoDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const saved = localStorage.getItem(LOCAL_STORAGE_ATTENDEES_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) return parsed;
+        if (Array.isArray(parsed)) {
+          const cleaned = parsed.filter(a => !isSeedOrDefaultAttendee(a));
+          try {
+            localStorage.setItem(LOCAL_STORAGE_ATTENDEES_KEY, JSON.stringify(cleaned));
+          } catch {}
+          return cleaned;
+        }
       }
     } catch {
       // ignore
@@ -1856,9 +1467,13 @@ export const ExpoDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const saved = localStorage.getItem(LOCAL_STORAGE_ATTENDEES_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setAttendees(parsed);
-          return parsed;
+        if (Array.isArray(parsed)) {
+          const cleaned = parsed.filter(a => !isSeedOrDefaultAttendee(a));
+          setAttendees(cleaned);
+          try {
+            localStorage.setItem(LOCAL_STORAGE_ATTENDEES_KEY, JSON.stringify(cleaned));
+          } catch {}
+          return cleaned;
         }
       }
     } catch (e) {
@@ -2323,44 +1938,8 @@ export const ExpoDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     };
   };
 
-  const resetMarketerDashboard = (marketerId?: string): { success: boolean; message: string } => {
-    setMarketerAccounts(prev => prev.map(m => {
-      if (!marketerId || marketerId === 'ALL' || m.id === marketerId || m.referralCode === marketerId) {
-        const updated: MarketerAccount = {
-          ...m,
-          totalEarningsNGN: 0,
-          paidEarningsNGN: 0,
-          pendingEarningsNGN: 0,
-          payoutStatus: 'UNPAID',
-          paymentConfirmations: []
-        };
-        if (marketerAuth.marketer?.id === m.id) {
-          setMarketerAuth(auth => ({ ...auth, marketer: updated }));
-        }
-        return updated;
-      }
-      return m;
-    }));
-
-    setAttendees(prev => prev.map(att => {
-      if (!marketerId || marketerId === 'ALL' || att.marketerId === marketerId || att.referralCode === marketerId) {
-        return {
-          ...att,
-          referralCode: undefined,
-          marketerId: undefined,
-          marketerName: undefined,
-          commissionEarnedNGN: 0,
-          commissionPaidNGN: 0,
-          commissionCredited: false,
-          commissionApprovedAt: undefined,
-          commissionApprovedBy: undefined
-        };
-      }
-      return att;
-    }));
-
-    playNotificationSound('broadcast');
-    return { success: true, message: '✅ Marketer dashboard earnings and referral records have been reset to ₦0.' };
+  const resetMarketerDashboard = (_marketerId?: string): { success: boolean; message: string } => {
+    return { success: false, message: 'Reset functionality is permanently disabled.' };
   };
 
   const verifyReferralCode = (code: string, passType: string, basePriceNGN: number): ReferralVerificationResult => {
@@ -2611,19 +2190,9 @@ export const ExpoDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setActivePushBroadcast(null);
   };
 
-  // Reset to Factory Defaults
-
+  // Factory reset permanently disabled to prevent any accidental data wipe
   const resetToDefaults = () => {
-    setExpoDetails(EXPO_DETAILS);
-    setHeroSlides(HERO_SLIDES_INITIAL);
-    setSpeakers(SPEAKERS);
-    setSessions(PROGRAMME_SESSIONS);
-    setTiers(REGISTRATION_TIERS);
-    setBoothPackages(DEFAULT_BOOTH_PACKAGES);
-    setSponsors(SPONSORS);
-    setSectors(SECTORS_COVERED);
-    setFaqs(FAQ_ITEMS);
-    localStorage.removeItem(LOCAL_STORAGE_DATA_KEY);
+    // No-op: all reset routines are permanently removed across the website
   };
 
   // Export Data JSON

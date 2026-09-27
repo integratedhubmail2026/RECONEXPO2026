@@ -121,21 +121,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     updateTimer();
     const interval = setInterval(updateTimer, 1000);
 
-    // Listen for manual reset event from Admin if administrator explicitly initiates one
-    const handleManualReset = (e: CustomEvent) => {
-      const newMs = e.detail?.targetMs || (Date.now() + 24 * 60 * 60 * 1000);
-      targetMs = newMs;
-      try {
-        localStorage.setItem(LOCAL_STORAGE_COUNTDOWN_KEY, String(targetMs));
-      } catch {}
-      updateTimer();
-    };
-
-    window.addEventListener('recon_manual_reset_24h_timer', handleManualReset as EventListener);
-
     return () => {
       clearInterval(interval);
-      window.removeEventListener('recon_manual_reset_24h_timer', handleManualReset as EventListener);
     };
   }, []);
 
@@ -269,6 +256,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               expoDetails.name
             )}
           </h1>
+
+          {/* Organizer Attribution Banner */}
+          <div 
+            id="hero-organizer-attribution"
+            className="mt-3.5 inline-flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-slate-950/70 border border-emerald-500/30 backdrop-blur-xl shadow-lg shadow-black/40 text-center max-w-full"
+          >
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-300">
+              <Award className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+              <span>{expoDetails.siteTexts?.heroOrganizerLabel || "This Event Is Organized By:"}</span>
+            </div>
+            <div className="text-xs sm:text-sm font-bold text-white tracking-tight">
+              {(() => {
+                const text = expoDetails.siteTexts?.heroOrganizerText;
+                if (text && !text.includes("Afrinet Group") && !text.includes("Organized by the RECON Expo Secretariat")) {
+                  return <span className="text-emerald-400 font-extrabold">{text}</span>;
+                }
+                return (
+                  <>
+                    <span className="text-emerald-400 font-extrabold">Afrinet Group</span>{' '}
+                    <span className="text-slate-300 font-normal text-xs">and</span>{' '}
+                    <span className="text-emerald-400 font-extrabold">Afrinex West Africa</span>{' '}
+                    <span className="text-amber-300 font-bold text-xs inline-block mx-0.5 sm:mx-1">in Collaboration with</span>{' '}
+                    <span className="text-emerald-300 font-extrabold">Abuja Chamber of Commerce and Industry(ACCI)</span>
+                  </>
+                );
+              })()}
+            </div>
+          </div>
         </div>
 
         {/* Theme Tagline - Extra Large & Prominent */}

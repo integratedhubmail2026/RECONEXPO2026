@@ -88,7 +88,6 @@ export const MarketerManagerTab: React.FC<MarketerManagerTabProps> = ({
   onTestLoginMarketer,
   showToast,
 }) => {
-  const { resetMarketerDashboard } = useExpoData();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'PENDING' | 'ACTIVE' | 'SUSPENDED'>('ALL');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -617,20 +616,6 @@ export const MarketerManagerTab: React.FC<MarketerManagerTabProps> = ({
               <FileText className="w-3.5 h-3.5" />
               <span>JSON</span>
             </button>
-
-            <button
-              onClick={() => {
-                if (window.confirm('Are you sure you want to reset ALL marketer dashboards to ₦0? All referral earnings, payouts, and referral associations will be reset to zero across all marketer accounts.')) {
-                  const res = resetMarketerDashboard('ALL');
-                  showToast(res.message);
-                }
-              }}
-              className="px-3 py-1.5 rounded-xl bg-red-500/15 hover:bg-red-500/25 text-red-300 border border-red-500/30 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
-              title="Reset all marketer earnings and referral dashboards to ₦0"
-            >
-              <RotateCcw className="w-3.5 h-3.5 text-red-400" />
-              <span>Reset All Dashboards to ₦0</span>
-            </button>
           </div>
         </div>
       )}
@@ -922,19 +907,6 @@ export const MarketerManagerTab: React.FC<MarketerManagerTabProps> = ({
                         title="Test Login as Marketer"
                       >
                         <UserCheck className="w-3.5 h-3.5" />
-                      </button>
-
-                      <button
-                        onClick={() => {
-                          if (window.confirm(`Reset marketer dashboard for "${mkt.fullName}" (${mkt.referralCode}) to ₦0? All referral earnings and metrics will be cleared.`)) {
-                            const res = resetMarketerDashboard(mkt.id);
-                            showToast(res.message);
-                          }
-                        }}
-                        className="p-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 transition-colors cursor-pointer"
-                        title="Reset Marketer Dashboard & Earnings to ₦0"
-                      >
-                        <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
                       </button>
 
                       <button

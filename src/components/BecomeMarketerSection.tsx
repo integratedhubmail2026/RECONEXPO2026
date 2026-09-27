@@ -46,7 +46,7 @@ interface BecomeMarketerSectionProps {
 }
 
 export const BecomeMarketerSection: React.FC<BecomeMarketerSectionProps> = ({ onOpenRegister }) => {
-  const { marketerAccounts, registerMarketer, attendees, confirmCommissionPayment, resetMarketerDashboard, marketerAuth, expoDetails } = useExpoData();
+  const { marketerAccounts, registerMarketer, attendees, confirmCommissionPayment, marketerAuth, expoDetails } = useExpoData();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTab, setModalTab] = useState<'register' | 'login' | 'dashboard'>('register');
@@ -734,7 +734,7 @@ Official Portal: https://reconexpo.afrinetgroup.com
             {modalTab === 'dashboard' && currentMarketer && (
               <div className="space-y-6 text-xs animate-fade-in">
                 
-                {/* Marketer Dashboard Header Banner with Reset Action */}
+                {/* Marketer Dashboard Header Banner */}
                 <div className="p-3.5 rounded-2xl bg-gradient-to-r from-slate-900 via-black to-slate-900 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Active Marketer Portal</div>
@@ -743,21 +743,6 @@ Official Portal: https://reconexpo.afrinetgroup.com
                       <span className="text-emerald-400 font-mono text-xs font-bold">({currentMarketer.referralCode})</span>
                     </div>
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (window.confirm(`Are you sure you want to reset the marketer dashboard for "${currentMarketer.fullName}" (${currentMarketer.referralCode}) to ₦0? All referral earnings and metrics will be reset to zero.`)) {
-                        const res = resetMarketerDashboard(currentMarketer.id);
-                        setFormSuccess(res.message);
-                      }
-                    }}
-                    className="px-3 py-2 rounded-xl bg-red-500/15 hover:bg-red-500/25 text-red-300 border border-red-500/30 font-bold text-[11px] flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm active:scale-95"
-                    title="Reset dashboard metrics and referral earnings to ₦0"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5 text-red-400" />
-                    <span>Reset Dashboard to ₦0</span>
-                  </button>
                 </div>
 
                 {/* Navigation Sub-Tabs inside Marketer Portal */}

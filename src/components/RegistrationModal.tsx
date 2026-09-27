@@ -919,7 +919,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     Already Registered? Check Payment Approval Status
                   </strong>
                   <span className="text-slate-300 text-[11px] block mt-0.5">
-                    Enter your Ticket Number (e.g. RECON-2026-ELT-8491), Email, or Phone to retrieve your status & ID Card.
+                    Enter your Ticket Number (e.g. RECON-2026-...), Email, or Phone to retrieve your status & ID Card.
                   </span>
                 </div>
                 <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
