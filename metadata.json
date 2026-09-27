@@ -1,0 +1,6 @@
+{
+  "name": "RECON Expo 2026 - Real Estate & Construction Expo Abuja",
+  "description": "Premium, modern web application and landing page for the 8th Real Estate & Construction Expo 2026 at Shehu Musa Yar'Adua Centre, Abuja, Nigeria (29th – 30th October 2026).",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

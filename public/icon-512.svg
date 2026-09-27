@@ -1,0 +1,15 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'>
+  <defs>
+    <linearGradient id='bg' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#022c22'/>
+      <stop offset='100%' stop-color='#059669'/>
+    </linearGradient>
+  </defs>
+  <rect width='512' height='512' rx='36' fill='url(#bg)'/>
+  <path d='M25 150 L25 75 L70 45 L110 65 L110 150 Z' fill='#005722'/>
+  <path d='M70 45 L110 65 L110 150 L70 150 Z' fill='#10b981'/>
+  <rect x='100' y='35' width='45' height='115' fill='#d31e1e' rx='4'/>
+  <path d='M40 160 L110 95 L175 160 Z' fill='#ea2020'/>
+  <path d='M65 160 L110 120 L150 160 Z' fill='#ffffff'/>
+  <text x='96' y='180' font-family='sans-serif' font-weight='900' font-size='16' fill='#fbbf24' text-anchor='middle'>RECON 2026</text>
+</svg>
