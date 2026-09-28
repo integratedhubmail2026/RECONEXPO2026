@@ -1,32 +1,26 @@
 {
-  "id": "/",
-  "name": "RECON Expo 2026 - Real Estate & Construction Expo",
+  "name": "RECON Expo 2026 - Real Estate & Construction Expo Abuja",
   "short_name": "RECON 2026",
-  "description": "The Premier Real Estate & Construction Expo in Abuja, Nigeria. Get instant event notifications, housing opportunities, and VIP plenary updates.",
+  "description": "8th Real Estate & Construction Expo 2026 at Shehu Musa Yar'Adua Centre, Abuja, Nigeria",
   "start_url": "/",
-  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "theme_color": "#022c22",
-  "background_color": "#02180e",
+  "background_color": "#020617",
+  "theme_color": "#10b981",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/badge-72.svg",
+      "sizes": "72x72",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icon-192.svg",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/svg+xml"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/icon-512.svg",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/svg+xml"
     }
   ]
 }

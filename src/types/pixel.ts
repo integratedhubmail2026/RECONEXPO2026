@@ -1,52 +1,19 @@
-export interface PixelConfig {
-  facebookPixelId: string;
-  facebookEnabled: boolean;
-  facebookTestEventCode?: string;
-  
-  tiktokPixelId: string;
-  tiktokEnabled: boolean;
-
+export interface PixelSettings {
+  metaPixelId: string;
+  metaPixelEnabled: boolean;
+  googleTagId: string;
+  googleTagEnabled: boolean;
   trackPageView: boolean;
-  trackViewContent: boolean;
-  trackInitiateCheckout: boolean;
-  trackLead: boolean;
-  trackPurchase: boolean;
-  trackCompleteRegistration: boolean;
-
-  debugMode: boolean;
-  updatedAt?: string;
-  updatedBy?: string;
+  trackRegistrations: boolean;
+  trackVipPurchases: boolean;
+  trackExhibitorInquiries: boolean;
+  customHeaderScript: string;
 }
 
-export type StandardPixelEvent = 
-  | 'PageView'
-  | 'ViewContent'
-  | 'InitiateCheckout'
-  | 'Lead'
-  | 'Purchase'
-  | 'CompleteRegistration'
-  | 'Search'
-  | 'Contact';
-
-export interface PixelEventPayload {
-  eventName: StandardPixelEvent;
-  platform?: 'facebook' | 'tiktok' | 'both';
-  contentName?: string;
-  category?: string;
-  value?: number;
-  currency?: string;
-  ticketNumber?: string;
-  email?: string;
-  phone?: string;
-  customData?: Record<string, any>;
-  timestamp?: string;
-}
-
-export interface PixelLogEntry {
+export interface PixelEventLog {
   id: string;
-  eventName: StandardPixelEvent;
-  platforms: string[];
-  payload: PixelEventPayload;
+  eventName: string;
+  platform: 'Meta' | 'Google' | 'Internal';
+  data: Record<string, any>;
   timestamp: string;
-  url?: string;
 }

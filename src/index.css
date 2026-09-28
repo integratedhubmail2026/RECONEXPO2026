@@ -1,174 +1,45 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
-  :root {
-    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --font-display: 'Syne', 'Outfit', system-ui, sans-serif;
-    --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-    --font-classic: 'Cinzel', 'Playfair Display', Georgia, serif;
-    --font-serif-classic: 'Playfair Display', Georgia, serif;
-  }
-
   body {
-    font-family: var(--font-sans);
-    background-color: #022c22;
-    color: #f1f5f9;
-    background-image: 
-      radial-gradient(circle at 20% 30%, #064e3b 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(153, 27, 27, 0.28) 0%, transparent 50%);
-    background-attachment: fixed;
-  }
-
-  h1, h2, h3, .font-display {
-    font-family: var(--font-display);
-  }
-
-  .font-heading {
-    font-family: var(--font-heading);
-  }
-
-  .font-classic {
-    font-family: var(--font-classic);
-  }
-
-  .font-serif-classic {
-    font-family: var(--font-serif-classic);
+    background-color: #020617;
+    color: #f8fafc;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
   }
 }
 
-/* Frosted Glass Theme Classes */
-.frosted-bg-mesh {
-  background-color: #022c22;
-  background-image: 
-    radial-gradient(circle at 20% 25%, #064e3b 0%, transparent 55%),
-    radial-gradient(circle at 80% 75%, rgba(153, 27, 27, 0.28) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(6, 78, 59, 0.35) 0%, transparent 60%);
-}
-
-.frosted-dotted-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-.glass-panel {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
-}
-
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-panel-hover:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.35), 0 0 25px rgba(52, 211, 153, 0.15);
-  transform: translateY(-2px);
-}
-
-.glass-panel-emerald {
-  background: rgba(16, 185, 129, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(52, 211, 153, 0.2);
-}
-
-.glass-panel-red {
-  background: rgba(239, 68, 68, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-}
-
-.frosted-pill {
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(52, 211, 153, 0.25);
-  backdrop-filter: blur(12px);
-}
-
-.frosted-pill-red {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  backdrop-filter: blur(12px);
-}
-
-.frosted-title-glow {
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.2), 0 0 60px rgba(52, 211, 153, 0.15);
-}
-
-.neon-glow-green {
-  text-shadow: 0 0 20px rgba(52, 211, 153, 0.5), 0 0 40px rgba(16, 185, 129, 0.25);
-}
-
-.neon-glow-red {
-  text-shadow: 0 0 20px rgba(239, 68, 68, 0.5), 0 0 40px rgba(220, 38, 38, 0.25);
-}
-
-@keyframes pulseSlow {
-  0%, 100% { opacity: 0.35; transform: scale(1); }
-  50% { opacity: 0.65; transform: scale(1.04); }
-}
-
-.animate-pulse-slow {
-  animation: pulseSlow 7s ease-in-out infinite;
-}
-
-@keyframes floatElement {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
-.animate-float {
-  animation: floatElement 5s ease-in-out infinite;
-}
-
-/* Custom Scrollbar */
+/* Custom modern dark scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #022c22;
+  background: #020617;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: #065f46;
   border-radius: 4px;
-  backdrop-filter: blur(4px);
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(52, 211, 153, 0.6);
+  background: #10b981;
 }
 
-/* 3D Physical Smart ID Card Flip & Lighting Utilities */
-.card-perspective {
-  perspective: 1400px;
+/* Print Badge Stylesheet */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  nav, footer, button, .no-print, header {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
 }
-
-.preserve-3d {
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.rotate-y-180 {
-  transform: rotateY(180deg);
-}
-
-@keyframes holographicGloss {
-  0% { transform: translateX(-100%) rotate(25deg); opacity: 0; }
-  50% { opacity: 0.35; }
-  100% { transform: translateX(200%) rotate(25deg); opacity: 0; }
-}
-
-.animate-card-gloss {
-  animation: holographicGloss 3.5s ease-in-out infinite;
-}
-
-
-

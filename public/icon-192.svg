@@ -1,15 +1,11 @@
-<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
   <defs>
-    <linearGradient id='bg' x1='0%' y1='0%' x2='100%' y2='100%'>
-      <stop offset='0%' stop-color='#022c22'/>
-      <stop offset='100%' stop-color='#059669'/>
+    <linearGradient id="g192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
     </linearGradient>
   </defs>
-  <rect width='192' height='192' rx='36' fill='url(#bg)'/>
-  <path d='M25 150 L25 75 L70 45 L110 65 L110 150 Z' fill='#005722'/>
-  <path d='M70 45 L110 65 L110 150 L70 150 Z' fill='#10b981'/>
-  <rect x='100' y='35' width='45' height='115' fill='#d31e1e' rx='4'/>
-  <path d='M40 160 L110 95 L175 160 Z' fill='#ea2020'/>
-  <path d='M65 160 L110 120 L150 160 Z' fill='#ffffff'/>
-  <text x='96' y='180' font-family='sans-serif' font-weight='900' font-size='16' fill='#fbbf24' text-anchor='middle'>RECON 2026</text>
+  <rect width="184" height="184" x="4" y="4" rx="40" fill="#020617" stroke="#10b981" stroke-width="4" />
+  <path d="M56 144 L56 48 L100 48 C124 48 136 60 136 76 C136 90 126 100 106 102 L140 144 L110 144 L84 114 L84 144 Z M84 90 L100 90 C108 90 112 86 112 82 C112 76 108 74 100 74 L84 74 Z" fill="url(#g192)" />
+  <circle cx="152" cy="40" r="12" fill="#fbbf24" />
 </svg>

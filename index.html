@@ -1,64 +1,16 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RECON Expo 2026 | The 8th Real Estate & Construction Expo Abuja</title>
-    <meta name="description" content="The 8th Real Estate & Construction Expo 2026 in Abuja, Nigeria. 29th – 30th October 2026 at Shehu Musa Yar'Adua Centre. Exploring Opportunities in the Real Sector for Economic Development." />
-    <meta property="og:title" content="RECON Expo 2026 | Real Estate & Construction Expo Abuja, Nigeria" />
-    <meta property="og:description" content="Join 5,000+ investors, developers, architects, and innovators at Nigeria's premier property & infrastructure summit." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#022c22" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="RECON 2026" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="apple-touch-icon" href="/icon-192.png" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M10 80 L10 40 L35 25 L55 35 L55 80 Z' fill='%23005722'/%3E%3Cpath d='M35 25 L55 35 L55 80 L35 80 Z' fill='%23008f3a'/%3E%3Crect x='50' y='20' width='22' height='60' fill='%23d31e1e'/%3E%3Cpath d='M20 85 L55 52 L90 85 Z' fill='%23ea2020'/%3E%3Cpath d='M32 85 L55 64 L78 85 Z' fill='%23ffffff'/%3E%3C/svg%3E" />
+    <title>RECON Expo 2026 - Real Estate & Construction Expo Abuja</title>
+    <meta name="description" content="Premium, modern web application and landing page for the 8th Real Estate & Construction Expo 2026 at Shehu Musa Yar'Adua Centre, Abuja, Nigeria (29th – 30th October 2026)." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://checkout.flutterwave.com">
-    <link rel="preconnect" href="https://checkout.flutterwave.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@600;700;800;900&display=swap" rel="stylesheet" crossorigin="anonymous">
-    <!-- Window fetch compatibility protection for sandboxed iframe environments & polyfills -->
-    <script>
-      (function() {
-        try {
-          var origFetch = window.fetch;
-          var proto = Object.getPrototypeOf(window) || window;
-          var desc = Object.getOwnPropertyDescriptor(window, 'fetch') || Object.getOwnPropertyDescriptor(proto, 'fetch');
-          if (!desc || !desc.set || !desc.writable) {
-            try {
-              Object.defineProperty(window, 'fetch', {
-                get: function() {
-                  return origFetch;
-                },
-                set: function(val) {
-                  if (typeof val === 'function') {
-                    origFetch = val;
-                  }
-                },
-                configurable: true,
-                enumerable: true
-              });
-            } catch (inner) {
-              // Ignore if environment prevents re-defining on window
-            }
-          }
-        } catch (e) {
-          // Graceful fallback
-        }
-      })();
-    </script>
-    <!-- Flutterwave Inline Checkout v3 Script (deferred with async loading) -->
-    <script async src="https://checkout.flutterwave.com/v3.js"></script>
-    <!-- Google Identity Services (GIS) Client for resilient OAuth -->
-    <script async defer src="https://accounts.google.com/gsi/client"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-[#02180e] text-[#f1f5f9] font-sans antialiased selection:bg-[#22c55e] selection:text-[#02180e] overflow-x-hidden">
+  <body class="bg-slate-950 text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] antialiased selection:bg-emerald-500 selection:text-slate-950">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

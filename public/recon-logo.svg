@@ -1,142 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 400" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
   <defs>
-    <!-- Main 3D Emerald Gradients -->
-    <linearGradient id="reconEmeraldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#00b047" />
-      <stop offset="35%" stop-color="#009139" />
-      <stop offset="100%" stop-color="#00501f" />
+    <linearGradient id="reconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="50%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#022c22" />
     </linearGradient>
-
-    <linearGradient id="reconEmeraldLightFacet" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00d655" />
-      <stop offset="100%" stop-color="#00943a" />
-    </linearGradient>
-
-    <linearGradient id="reconEmeraldDarkFacet" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#006b29" />
-      <stop offset="100%" stop-color="#003d16" />
-    </linearGradient>
-
-    <linearGradient id="reconExpoGreen" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#00be4d" />
-      <stop offset="100%" stop-color="#007a30" />
-    </linearGradient>
-
-    <!-- Red 2026 Badge Gradient -->
-    <linearGradient id="reconRedBadge" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff2828" />
-      <stop offset="45%" stop-color="#e01818" />
-      <stop offset="100%" stop-color="#9e0a0a" />
-    </linearGradient>
-
-    <!-- Swoosh Gradients -->
-    <linearGradient id="reconSwooshGreen" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00b84c" />
-      <stop offset="50%" stop-color="#008836" />
-      <stop offset="100%" stop-color="#004d1d" />
-    </linearGradient>
-
-    <linearGradient id="reconSwooshRed" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#f02424" />
-      <stop offset="60%" stop-color="#cb1616" />
-      <stop offset="100%" stop-color="#8a0808" />
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
     </linearGradient>
   </defs>
-
-  <!-- LEFT ARCHITECTURAL ICONOGRAPHY -->
-  <g id="left-architectural-emblem">
-    <path d="M15 315 L15 150 L85 105 L135 130 L135 315 Z" fill="url(#reconEmeraldDarkFacet)" />
-    <path d="M85 105 L135 130 L135 315 L85 315 Z" fill="url(#reconEmeraldLightFacet)" />
-    <path d="M15 150 L85 105 L65 140 L15 170 Z" fill="#00e65b" opacity="0.9" />
-
-    <path d="M190 260 L190 60 L275 15 L275 290 Z" fill="#005421" />
-    <path d="M275 15 L320 50 L320 290 L275 290 Z" fill="url(#reconEmeraldLightFacet)" />
-    <path d="M225 80 L275 15 L275 290 L230 290 Z" fill="#00ff66" opacity="0.6" />
-
-    <path d="M115 280 L115 80 L195 80 L195 280 Z" fill="#d31e1e" />
-    <g stroke="#ffffff" stroke-width="2.8" opacity="0.95">
-      <line x1="115" y1="102" x2="195" y2="102" />
-      <line x1="115" y1="124" x2="195" y2="124" />
-      <line x1="115" y1="146" x2="195" y2="146" />
-      <line x1="115" y1="168" x2="195" y2="168" />
-      <line x1="115" y1="190" x2="195" y2="190" />
-      <line x1="115" y1="212" x2="195" y2="212" />
-      <line x1="115" y1="234" x2="195" y2="234" />
-      <line x1="142" y1="80" x2="142" y2="102" />
-      <line x1="168" y1="80" x2="168" y2="102" />
-      <line x1="128" y1="102" x2="128" y2="124" />
-      <line x1="155" y1="102" x2="155" y2="124" />
-      <line x1="182" y1="102" x2="182" y2="124" />
-      <line x1="142" y1="124" x2="142" y2="146" />
-      <line x1="168" y1="124" x2="168" y2="146" />
-      <line x1="128" y1="146" x2="128" y2="168" />
-      <line x1="155" y1="146" x2="155" y2="168" />
-      <line x1="182" y1="146" x2="182" y2="168" />
-      <line x1="142" y1="168" x2="142" y2="190" />
-      <line x1="168" y1="168" x2="168" y2="190" />
-      <line x1="128" y1="190" x2="128" y2="212" />
-      <line x1="155" y1="190" x2="155" y2="212" />
-      <line x1="182" y1="190" x2="182" y2="212" />
-    </g>
-
-    <path d="M25 330 L205 195 L340 315 L318 328 L205 225 L45 340 Z" fill="#ffffff" />
-    <path d="M10 338 L205 180 L355 315 L330 335 L205 212 L35 352 Z" fill="#ea2020" />
-    <path d="M55 338 L205 215 L305 320 L305 338 L55 338 Z" fill="#ffffff" />
-
-    <g transform="translate(175, 238)">
-      <rect x="0" y="0" width="18" height="18" fill="#008033" rx="2" />
-      <rect x="23" y="0" width="18" height="18" fill="#008033" rx="2" />
-      <rect x="0" y="23" width="18" height="18" fill="#008033" rx="2" />
-      <rect x="23" y="23" width="18" height="18" fill="#008033" rx="2" />
-    </g>
-  </g>
-
-  <!-- MAIN LOGO TYPOGRAPHY "RECON" -->
-  <g id="recon-main-text">
-    <path d="M340 70 H415 C455 70 480 92 480 125 C480 152 460 172 428 178 L490 255 H432 L382 188 H372 V255 H340 Z M372 98 V160 H410 C432 160 448 148 448 130 C448 112 432 98 410 98 Z" fill="url(#reconEmeraldGrad)" />
-    <path d="M340 70 L372 70 L400 102 L372 102 Z" fill="#00e65b" opacity="0.4" />
-
-    <path d="M495 70 H580 V102 H530 V142 H572 V174 H530 V222 H585 V255 H495 Z" fill="url(#reconEmeraldGrad)" />
-    <path d="M495 70 H580 L560 90 H530 V70 Z" fill="#00e65b" opacity="0.35" />
-
-    <path d="M668 102 C658 80 638 70 612 70 C575 70 542 102 542 162 C542 222 575 255 612 255 C638 255 658 245 668 222 L640 202 C634 215 624 224 612 224 C590 224 576 200 576 162 C576 124 590 100 612 100 C624 100 634 110 640 122 Z" fill="url(#reconEmeraldGrad)" />
-
-    <g id="recon-letter-o-emblem">
-      <path d="M680 162 C680 102 715 68 765 68 C815 68 850 102 850 162 C850 222 815 258 765 258 C715 258 680 222 680 162 Z M714 162 C714 204 735 226 765 226 C795 226 816 204 816 162 C816 120 795 98 765 98 C735 98 714 120 714 162 Z" fill="url(#reconEmeraldGrad)" />
-      <g transform="translate(740, 10)">
-        <path d="M15 82 L15 35 L36 15 L36 82 Z" fill="#005823" />
-        <path d="M36 15 L52 28 L52 82 L36 82 Z" fill="#00a342" />
-        <rect x="0" y="44" width="16" height="38" fill="#d31e1e" />
-        <g stroke="#ffffff" stroke-width="1.6" opacity="0.95">
-          <line x1="0" y1="54" x2="16" y2="54" />
-          <line x1="0" y1="64" x2="16" y2="64" />
-          <line x1="0" y1="74" x2="16" y2="74" />
-          <line x1="8" y1="44" x2="8" y2="54" />
-          <line x1="4" y1="54" x2="4" y2="64" />
-          <line x1="12" y1="54" x2="12" y2="64" />
-          <line x1="8" y1="64" x2="8" y2="74" />
-        </g>
-        <path d="M-18 108 L26 62 L70 108 L56 116 L26 86 L-4 116 Z" fill="#ea2020" />
-        <path d="M-6 108 L26 76 L58 108 Z" fill="#ffffff" />
-      </g>
-    </g>
-
-    <path d="M865 70 H900 L952 195 V70 H985 V255 H952 L898 128 V255 H865 Z" fill="url(#reconEmeraldGrad)" />
-  </g>
-
-  <!-- "Expo" & "2026" RED SPEED CAPSULE BADGE -->
-  <g id="expo-2026-badge" transform="translate(340, 245)">
-    <text x="0" y="76" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="94" fill="url(#reconExpoGreen)" font-style="italic" letter-spacing="-2">Expo</text>
-    <g transform="translate(255, -8)">
-      <path d="M32 6 C16 6 5 18 0 30 L-22 92 C-26 104 -16 114 -4 114 L340 114 C366 114 378 94 382 78 L392 24 C395 12 384 6 368 6 Z" fill="url(#reconRedBadge)" />
-      <path d="M28 14 L360 14 C372 14 376 20 372 32 L360 52 L6 52 L22 22 C24 16 26 14 28 14 Z" fill="#ffffff" opacity="0.28" />
-      <text x="178" y="88" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="90" fill="#ffffff" font-style="italic" letter-spacing="1">2026</text>
-    </g>
-  </g>
-
-  <!-- DYNAMIC RACING SWOOSHES -->
-  <g id="bottom-flowing-swooshes">
-    <path d="M10 360 C140 295 360 305 560 325 C750 345 900 325 970 250 C960 278 830 342 610 342 C380 342 180 388 10 360 Z" fill="url(#reconSwooshGreen)" />
-    <path d="M165 358 C270 380 490 392 680 365 C800 342 880 320 940 292 C885 332 770 375 620 388 C420 405 255 392 165 358 Z" fill="url(#reconSwooshRed)" />
-  </g>
+  <rect width="92" height="92" x="4" y="4" rx="20" fill="#020617" stroke="#10b981" stroke-width="3" />
+  <path d="M28 72 L28 28 L50 28 C62 28 68 34 68 42 C68 49 63 54 53 55 L70 72 L55 72 L42 57 L42 72 Z M42 45 L50 45 C54 45 56 43 56 41 C56 38 54 37 50 37 L42 37 Z" fill="url(#reconGrad)" />
+  <circle cx="76" cy="24" r="6" fill="url(#goldGrad)" />
 </svg>

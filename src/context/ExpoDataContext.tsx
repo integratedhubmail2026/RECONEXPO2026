@@ -320,7 +320,13 @@ export const isSeedOrDefaultAttendee = (a: any): boolean => {
     a.fullName.includes('Engr. Farouk Bello') ||
     a.fullName.includes('Chief Emeka Nnamani') ||
     a.fullName.includes('Victoria Adeleke-Peters') ||
-    a.fullName.includes('Kenneth Adeleke')
+    a.fullName.includes('Kenneth Adeleke') ||
+    a.fullName.includes('Aisha Bello') ||
+    a.fullName.includes('Farouk Danladi') ||
+    a.fullName.includes('Chidinma Okafor') ||
+    a.fullName.includes('Babatunde Sanusi') ||
+    a.fullName.includes('Zainab Mohammed') ||
+    a.fullName.includes('Osas Ighodaro')
   )) {
     return true;
   }
@@ -1194,6 +1200,11 @@ export const ExpoDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     try {
       if (typeof window !== 'undefined') {
         window.dispatchEvent(new CustomEvent('recon_new_live_registration', { detail: ticketToSave }));
+        if ('BroadcastChannel' in window) {
+          const ch = new BroadcastChannel('recon_live_registration_channel');
+          ch.postMessage({ type: 'NEW_REGISTRATION', attendee: ticketToSave });
+          ch.close();
+        }
       }
     } catch {
       // safe

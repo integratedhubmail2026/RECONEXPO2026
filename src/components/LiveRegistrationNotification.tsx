@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Building2, X, Sparkles, MapPin } from 'lucide-react';
-import { useExpoData } from '../context/ExpoDataContext';
+import { useExpoData, isSeedOrDefaultAttendee } from '../context/ExpoDataContext';
 import { getAttendeeProfilePhoto } from '../utils/avatarUtils';
 
 function getPassLabel(passType?: string): string {
@@ -24,6 +24,22 @@ function getInitials(name: string): string {
   return (parts[0]?.substring(0, 2) || 'RE').toUpperCase();
 }
 
+function formatTimeAgo(registeredAt?: string): string {
+  if (!registeredAt) return 'Just now';
+  const now = Date.now();
+  const registeredTime = new Date(registeredAt).getTime();
+  if (isNaN(registeredTime)) return 'Just now';
+  const diffSec = Math.max(0, Math.floor((now - registeredTime) / 1000));
+  if (diffSec < 90) return 'Just now';
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60) return `${diffMin}m ago`;
+  const diffHours = Math.floor(diffMin / 60);
+  if (diffHours < 24) return `${diffHours}h ago`;
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffDays < 7) return `${diffDays}d ago`;
+  return 'Recently';
+}
+
 export interface LiveDelegateItem {
   ticketNumber: string;
   fullName: string;
@@ -35,110 +51,6 @@ export interface LiveDelegateItem {
   timeAgo?: string;
 }
 
-// Curated live delegate activity stream representing verified Nigerian built-environment leaders
-const LIVE_DELEGATE_STREAM: LiveDelegateItem[] = [
-  {
-    ticketNumber: 'RECON-2026-ELT-8491',
-    fullName: 'Arc. Kenneth Adeleke',
-    organization: 'Apex Build Infrastructure Ltd',
-    role: 'Principal Partner',
-    passType: 'elite',
-    city: 'Abuja (FCT)',
-    photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
-    timeAgo: 'Just now'
-  },
-  {
-    ticketNumber: 'RECON-2026-EXH-5510',
-    fullName: 'Engr. Aisha Bello, FNSE',
-    organization: 'Matrix Civil & Construction Systems',
-    role: 'Managing Director',
-    passType: 'exhibitor',
-    city: 'Lagos State',
-    photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
-    timeAgo: '1m ago'
-  },
-  {
-    ticketNumber: 'RECON-2026-ELT-9182',
-    fullName: 'Alhaji Farouk Danladi',
-    organization: 'Sahel Infrastructure & Housing Trust',
-    role: 'Executive Vice Chairman',
-    passType: 'elite',
-    city: 'Kano / Abuja',
-    photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
-    timeAgo: 'Just now'
-  },
-  {
-    ticketNumber: 'RECON-2026-SPO-1093',
-    fullName: 'Dr. Chidinma Okafor',
-    organization: 'Greenfield REIT & Property Acquisitions',
-    role: 'Head of Capital Markets',
-    passType: 'sponsor',
-    city: 'Enugu State',
-    photoUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80',
-    timeAgo: '2m ago'
-  },
-  {
-    ticketNumber: 'RECON-2026-VIS-4102',
-    fullName: 'Surv. Babatunde Sanusi',
-    organization: 'Urban Geo-Spatial Surveyors',
-    role: 'Lead Geomatics Surveyor',
-    passType: 'visitor',
-    city: 'Lagos State',
-    photoUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80',
-    timeAgo: 'Just now'
-  },
-  {
-    ticketNumber: 'RECON-2026-ELT-4402',
-    fullName: 'Barr. Zainab Mohammed',
-    organization: 'Veritas Real Estate Law Chambers',
-    role: 'Managing Partner',
-    passType: 'elite',
-    city: 'Abuja (FCT)',
-    photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
-    timeAgo: '3m ago'
-  },
-  {
-    ticketNumber: 'RECON-2026-EXH-6210',
-    fullName: 'Engr. Osas Ighodaro',
-    organization: 'Niger Delta Smart Building Systems',
-    role: 'Chief Technical Officer',
-    passType: 'exhibitor',
-    city: 'Port Harcourt',
-    photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80',
-    timeAgo: 'Just now'
-  },
-  {
-    ticketNumber: 'RECON-2026-PTN-7730',
-    fullName: 'Dr. Aliyu Mohammed',
-    organization: 'Federal Housing & Urban Development PPP',
-    role: 'Director of Partnerships',
-    passType: 'partner',
-    city: 'Abuja (FCT)',
-    photoUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80',
-    timeAgo: '4m ago'
-  },
-  {
-    ticketNumber: 'RECON-2026-ELT-5301',
-    fullName: 'Chief Emeka Nnamani',
-    organization: 'Coal City Infrastructure Consortium',
-    role: 'Chairman & CEO',
-    passType: 'elite',
-    city: 'Enugu State',
-    photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
-    timeAgo: 'Just now'
-  },
-  {
-    ticketNumber: 'RECON-2026-VIS-3392',
-    fullName: 'Mrs. Victoria Adeleke-Peters',
-    organization: 'Lumina Clean Energy & Facades',
-    role: 'Commercial Strategist',
-    passType: 'visitor',
-    city: 'Lagos State',
-    photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
-    timeAgo: '5m ago'
-  }
-];
-
 export const LiveRegistrationNotification: React.FC = () => {
   const { attendees = [] } = useExpoData();
   const [activeNotification, setActiveNotification] = useState<LiveDelegateItem | null>(null);
@@ -148,23 +60,32 @@ export const LiveRegistrationNotification: React.FC = () => {
   const currentIndexRef = useRef(0);
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Combines any actual registered attendees from ExpoDataContext with the curated live stream
-  // Real registered attendees are always prioritized first
-  const activeStream = useMemo(() => {
-    const realItems: LiveDelegateItem[] = (attendees || []).map(a => ({
+  // STRICT FILTER: Only genuine, real manually registered attendees
+  // All fake/curated dummy streams have been completely stopped and removed
+  const realAttendees = useMemo(() => {
+    return (attendees || []).filter(a => 
+      a && 
+      a.fullName && 
+      a.ticketNumber && 
+      !isSeedOrDefaultAttendee(a)
+    );
+  }, [attendees]);
+
+  // Convert only real registered attendees into live notification stream items
+  const activeStream = useMemo<LiveDelegateItem[]>(() => {
+    return realAttendees.map(a => ({
       ticketNumber: a.ticketNumber,
       fullName: a.fullName,
       organization: a.organization || 'Registered Delegate',
       role: a.role || 'Executive',
-      passType: a.passType || a.tier || 'elite',
+      passType: a.passType || a.tier || 'attendee',
       city: a.city || 'Nigeria',
       photoUrl: a.photoUrl || a.avatarUrl,
-      timeAgo: 'Just now'
+      timeAgo: formatTimeAgo(a.registeredAt)
     }));
-    return [...realItems, ...LIVE_DELEGATE_STREAM];
-  }, [attendees]);
+  }, [realAttendees]);
 
-  // Function to show a specific attendee for 5.5 seconds then slide out
+  // Function to show a specific attendee notification for 5.5 seconds then slide out
   const triggerNotification = (item: LiveDelegateItem) => {
     if (!item) return;
     setActiveNotification(item);
@@ -181,48 +102,52 @@ export const LiveRegistrationNotification: React.FC = () => {
     }, 5500);
   };
 
-  // 1. Initial display and periodic ongoing rotation loop across the homepage
+  // 1. Initial display and rotation ONLY if real manual registrations exist
   useEffect(() => {
+    // If user manually dismissed or there are NO real manual registrations, show nothing
     if (isDismissedByUser || activeStream.length === 0) return;
 
-    // Show first notification 2 seconds after page load
+    // Show latest real attendee after a short delay on page load
     const initialTimer = setTimeout(() => {
       if (activeStream.length > 0) {
         triggerNotification(activeStream[0]);
       }
-    }, 2000);
+    }, 3000);
 
-    // Keep showing periodic live registration notifications every 11 seconds
-    const interval = setInterval(() => {
-      if (activeStream.length === 0) return;
-      currentIndexRef.current = (currentIndexRef.current + 1) % activeStream.length;
-      const nextAttendee = activeStream[currentIndexRef.current];
-      if (nextAttendee) {
-        triggerNotification(nextAttendee);
-      }
-    }, 11000);
+    // If multiple real attendees exist, cycle calmly every 24 seconds
+    let interval: NodeJS.Timeout | null = null;
+    if (activeStream.length > 1) {
+      interval = setInterval(() => {
+        if (activeStream.length <= 1) return;
+        currentIndexRef.current = (currentIndexRef.current + 1) % activeStream.length;
+        const nextAttendee = activeStream[currentIndexRef.current];
+        if (nextAttendee) {
+          triggerNotification(nextAttendee);
+        }
+      }, 24000);
+    }
 
     return () => {
       clearTimeout(initialTimer);
-      clearInterval(interval);
+      if (interval) clearInterval(interval);
       if (hideTimerRef.current) {
         clearTimeout(hideTimerRef.current);
       }
     };
   }, [activeStream, isDismissedByUser]);
 
-  // 2. Listen for INSTANT real-time registration event dispatched when a user submits a registration
+  // 2. Listen for INSTANT real-time manual registration event dispatched when a real user submits registration
   useEffect(() => {
     const handleNewRegistration = (e: CustomEvent) => {
-      if (e.detail) {
+      if (e.detail && !isSeedOrDefaultAttendee(e.detail)) {
         setIsDismissedByUser(false);
         const newItem: LiveDelegateItem = {
           ticketNumber: e.detail.ticketNumber || `RECON26-${Date.now()}`,
           fullName: e.detail.fullName,
           organization: e.detail.organization || 'VIP Delegate',
           role: e.detail.role || 'Industry Professional',
-          passType: e.detail.passType || e.detail.tier || 'elite',
-          city: e.detail.city || 'Abuja (FCT)',
+          passType: e.detail.passType || e.detail.tier || 'attendee',
+          city: e.detail.city || 'Nigeria',
           photoUrl: e.detail.photoUrl || e.detail.avatarUrl,
           timeAgo: 'Just now'
         };
@@ -236,13 +161,50 @@ export const LiveRegistrationNotification: React.FC = () => {
     };
   }, []);
 
+  // 3. Listen for cross-tab real manual registrations via BroadcastChannel
+  useEffect(() => {
+    let channel: BroadcastChannel | null = null;
+    try {
+      if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+        channel = new BroadcastChannel('recon_live_registration_channel');
+        channel.onmessage = (event) => {
+          if (event.data?.type === 'NEW_REGISTRATION' && event.data.attendee) {
+            const att = event.data.attendee;
+            if (!isSeedOrDefaultAttendee(att)) {
+              setIsDismissedByUser(false);
+              const newItem: LiveDelegateItem = {
+                ticketNumber: att.ticketNumber || `RECON26-${Date.now()}`,
+                fullName: att.fullName,
+                organization: att.organization || 'Registered Delegate',
+                role: att.role || 'Industry Professional',
+                passType: att.passType || att.tier || 'attendee',
+                city: att.city || 'Nigeria',
+                photoUrl: att.photoUrl || att.avatarUrl,
+                timeAgo: 'Just now'
+              };
+              triggerNotification(newItem);
+            }
+          }
+        };
+      }
+    } catch {
+      // safe
+    }
+
+    return () => {
+      if (channel) {
+        channel.close();
+      }
+    };
+  }, []);
+
   const handleDismiss = () => {
     setActiveNotification(null);
     setIsDismissedByUser(true);
-    // Pause auto-rotation for 45 seconds when dismissed
+    // Pause auto-rotation for 60 seconds when dismissed
     setTimeout(() => {
       setIsDismissedByUser(false);
-    }, 45000);
+    }, 60000);
   };
 
   return (
