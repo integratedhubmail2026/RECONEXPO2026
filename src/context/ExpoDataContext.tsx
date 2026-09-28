@@ -1217,10 +1217,13 @@ export const ExpoDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         const sheetId = localStorage.getItem('recon_expo_google_spreadsheet_id_v1') || '1merM9cTEflcwq_DV4McZNoQZHcxwnf5QwVsl5f3yq1M';
         const webhookUrl = localStorage.getItem('recon_expo_google_sheets_webhook_url');
 
-        // Automated SMTP Digital Pass & Ticket Dispatch to Attendee Inbox
-        import('../services/emailService').then(({ sendAttendeeConfirmationEmail }) => {
+        // Automated SMTP Digital Pass & Ticket Dispatch to Attendee Inbox & Admin Alert
+        import('../services/emailService').then(({ sendAttendeeConfirmationEmail, sendAdminRegistrationAlertEmail }) => {
           sendAttendeeConfirmationEmail(ticketToSave).catch(err => {
             console.log('[SMTP Background Auto-Dispatch Notice]', err?.message);
+          });
+          sendAdminRegistrationAlertEmail(ticketToSave).catch(err => {
+            console.log('[SMTP Admin Alert Notice]', err?.message);
           });
         }).catch(() => {});
 
@@ -1507,6 +1510,17 @@ export const ExpoDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     } catch {
       // safe
     }
+
+    // Automated Email Dispatch to Secretariat Inbox
+    try {
+      import('../services/emailService').then(({ sendContactMessageAlertEmail }) => {
+        sendContactMessageAlertEmail(newMsg).catch(err => {
+          console.log('[SMTP Contact Alert Notice]', err?.message);
+        });
+      }).catch(() => {});
+    } catch {
+      // safe
+    }
   };
 
   const updateContactMessageStatus = (id: string, status: 'unread' | 'read' | 'replied', replyNotes?: string) => {
@@ -1720,6 +1734,18 @@ export const ExpoDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     };
 
     setMarketerAccounts(prev => [newMarketer, ...prev]);
+
+    // Automated Marketer Onboarding Welcome Email
+    try {
+      import('../services/emailService').then(({ sendMarketerWelcomeEmail }) => {
+        sendMarketerWelcomeEmail(newMarketer).catch(err => {
+          console.log('[SMTP Marketer Welcome Notice]', err?.message);
+        });
+      }).catch(() => {});
+    } catch {
+      // safe
+    }
+
     return { success: true, message: `Marketer account for ${newMarketer.fullName} (Code: ${codeClean}) created successfully!`, marketer: newMarketer };
   };
 
